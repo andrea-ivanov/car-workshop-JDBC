@@ -11,9 +11,11 @@ public interface MechanicGateway extends Gateway<MechanicRecord> {
 	Optional<MechanicRecord> findByNif(String nif) throws PersistenceException;
 	
 	public class MechanicRecord extends Gateway.BaseRecord {
+		public String id;
+		public long version;
+
 		public String nif;
 		public String name;
 		public String surname;
-		
 	}
 }

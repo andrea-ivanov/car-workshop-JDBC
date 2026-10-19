@@ -1,19 +1,21 @@
 package uo.ri.cws.application.service.invoice.create.commands;
 
+
+import java.util.ArrayList;
 import java.util.List;
 
 import uo.ri.conf.Factories;
 import uo.ri.cws.application.persistence.util.command.Command;
 import uo.ri.cws.application.persistence.workorder.WorkOrderGateway;
+import uo.ri.cws.application.persistence.workorder.WorkOrderGateway.WorkOrderRecord;
 import uo.ri.cws.application.service.invoice.InvoicingService.InvoicingWorkOrderDto;
 import uo.ri.util.assertion.ArgumentChecks;
-import uo.ri.util.assertion.BusinessChecks;
 import uo.ri.util.exception.BusinessException;
 
 public class FindNotInvoicedWorkOrdersByClient implements Command<List<InvoicingWorkOrderDto>>{
 
 	private String nif;
-	WorkOrderGateway wg = Factories.persistence.forWorkOrder();
+	private WorkOrderGateway wg = Factories.persistence.forWorkOrder();
 	
 	public FindNotInvoicedWorkOrdersByClient(String nif) {
 		ArgumentChecks.isNotNull(nif, "El nif no puede ser nulo");
@@ -24,9 +26,22 @@ public class FindNotInvoicedWorkOrdersByClient implements Command<List<Invoicing
 	@Override
 	public List<InvoicingWorkOrderDto> execute() throws BusinessException {
 		
-		List<InvoicingWorkOrderDto> listMechanicRecord = wg.findNotInvoicedWorkOrdersByClient(nif);
+		List<WorkOrderRecord> listWorkOrders = wg.findNotInvoicedWorkOrdersByClient(nif);
+		// transformamos al dto
+		List<InvoicingWorkOrderDto> iwodto = new ArrayList<InvoicingWorkOrderDto>();
+		for(WorkOrderRecord wr : listWorkOrders) {
+			InvoicingWorkOrderDto dto = new InvoicingWorkOrderDto();
+			dto.id = wr.id;
+			dto.description= wr.description;
+			dto.date = wr.date;
+			dto.state = wr.state;
+			dto.amount = dto.amount;
+			
+			iwodto.add(dto);
+		}
 		
-		return InvoiceDtoAssembler.toDto(listMechanicRecord);
+		
+		return iwodto;
 	}
 
 }

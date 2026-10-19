@@ -1,6 +1,7 @@
 package uo.ri.cws.application.persistence.workorder.impl;
 
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -58,5 +59,21 @@ public class WorkOrderGatewayImpl implements WorkOrderGateway {
             throw new PersistenceException(e);
         }
     }
+
+	@Override
+	public List<WorkOrderRecord> findNotInvoicedWorkOrdersByClient(String nif) throws PersistenceException {
+		Connection c = Jdbc.getCurrentConnection(); // fuera del try para que al salir no se cierre la conexión
+		
+        try (PreparedStatement pst = c.prepareStatement(Queries.getSQLSentence("TWORKORDERS_FIND_NOT_INVOICED"))) {
+            pst.setString(1, nif);
+            
+            try (ResultSet rs = pst.executeQuery()) {
+            	return new WorkOrderRecordAssembler().toRecordList(rs);
+            }
+
+        } catch (SQLException e) {
+            throw new PersistenceException(e);
+        }
+	}
 
 }

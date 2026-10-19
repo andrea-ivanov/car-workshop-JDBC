@@ -109,6 +109,9 @@ public interface InvoicingService {
 	 */
 	void settleInvoice(String invoiceId, Map<String, BigDecimal> charges) throws BusinessException;
 
+	/*
+	 * Para el caso de facturar: create
+	 */
 	public static class InvoiceDto {
 	    public String id;              // surrogate id (UUID)
 	    public long version;
@@ -123,6 +126,9 @@ public interface InvoicingService {
 	    public String state;           // as in InvoiceState
 	}
 
+	/*
+	 * Para el caso de listar no facturadas: FindNotInvoicedWorkOrdersByClient
+	 */
 	public static class InvoicingWorkOrderDto {
 		public String id;
 		public String description;
