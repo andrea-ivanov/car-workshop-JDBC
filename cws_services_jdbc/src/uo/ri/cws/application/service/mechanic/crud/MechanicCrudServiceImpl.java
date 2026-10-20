@@ -9,6 +9,7 @@ import uo.ri.cws.application.service.mechanic.MechanicCrudService;
 import uo.ri.cws.application.service.mechanic.crud.commands.AddMechanic;
 import uo.ri.cws.application.service.mechanic.crud.commands.DeleteMechanic;
 import uo.ri.cws.application.service.mechanic.crud.commands.FindByIdMechanic;
+import uo.ri.cws.application.service.mechanic.crud.commands.FindByNifMechanic;
 import uo.ri.cws.application.service.mechanic.crud.commands.ListAllMechanic;
 import uo.ri.cws.application.service.mechanic.crud.commands.ListMechanic;
 import uo.ri.cws.application.service.mechanic.crud.commands.UpdateMechanic;
@@ -41,7 +42,7 @@ public class MechanicCrudServiceImpl implements MechanicCrudService {
 
 	@Override
 	public Optional<MechanicDto> findByNif(String nif) throws BusinessException {
-		return new ListMechanic(nif).execute();
+		return executor.execute(new FindByNifMechanic(nif));
 	}
 
 	@Override

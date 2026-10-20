@@ -48,8 +48,17 @@ public class MechanicGatewayImpl implements MechanicGateway {
 
 	@Override
 	public void update(MechanicRecord t) throws PersistenceException {
-		// TODO Auto-generated method stub
+		Connection c = Jdbc.getCurrentConnection();
+		try (PreparedStatement pst = c.prepareStatement(Queries.getSQLSentence("TMECHANICS_UPDATE"))) {
+			pst.setString(1, t.name);
+			pst.setString(2, t.surname);
+			pst.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
+			pst.setString(4, t.id);
 
+			pst.executeUpdate();
+		} catch (SQLException e) {
+			throw new PersistenceException(e);
+		}
 	}
 
 	@Override
@@ -76,8 +85,18 @@ public class MechanicGatewayImpl implements MechanicGateway {
 
 	@Override
 	public Optional<MechanicRecord> findByNif(String nif) throws PersistenceException {
-		// TODO Auto-generated method stub
-		return null;
+		Connection c = Jdbc.getCurrentConnection(); // fuera del try para que al salir no se cierre la conexión
+		try (PreparedStatement pst = c.prepareStatement(Queries.getSQLSentence("TMECHANICS_FINDBYNIF"))) {
+			pst.setString(1, nif);
+			try (ResultSet rs = pst.executeQuery()) {
+				return rs.next()
+						? Optional.of(new MechanicRecordAssembler().toRecord(rs))
+						: Optional.empty();
+			}
+
+		} catch (SQLException e) {
+			throw new PersistenceException(e);
+		}
 	}
 
 }
