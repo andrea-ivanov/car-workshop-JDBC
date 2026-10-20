@@ -5,11 +5,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import uo.ri.cws.application.persistence.mechanic.MechanicGateway;
 import uo.ri.cws.application.persistence.util.jdbc.Jdbc;
+import uo.ri.cws.application.service.mechanic.MechanicCrudService.MechanicDto;
+import uo.ri.util.console.Console;
 import uo.ri.util.exception.PersistenceException;
 import uo.ri.util.jdbc.Queries;
 
@@ -79,8 +82,14 @@ public class MechanicGatewayImpl implements MechanicGateway {
 
 	@Override
 	public List<MechanicRecord> findAll() throws PersistenceException {
-		// TODO Auto-generated method stub
-		return null;
+		Connection c = Jdbc.getCurrentConnection();
+		try (PreparedStatement pst = c.prepareStatement("TMECHANICS_FINDALL")) {
+			try (ResultSet rs = pst.executeQuery();) {
+				return new MechanicRecordAssembler().toRecordList(rs);
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	@Override
