@@ -5,6 +5,8 @@ import uo.ri.cws.application.persistence.intervention.impl.InterventionGatewayIm
 import uo.ri.cws.application.persistence.invoice.InvoiceGateway;
 import uo.ri.cws.application.persistence.mechanic.MechanicGateway;
 import uo.ri.cws.application.persistence.mechanic.impl.MechanicGatewayImpl;
+import uo.ri.cws.application.persistence.voucher.VoucherGateway;
+import uo.ri.cws.application.persistence.voucher.impl.VoucherGatewayImpl;
 import uo.ri.cws.application.persistence.workorder.WorkOrderGateway;
 import uo.ri.cws.application.persistence.workorder.impl.WorkOrderGatewayImpl;
 
@@ -29,6 +31,11 @@ public class PersistenceFactoryImpl implements PersistenceFactory {
 	@Override
 	public InterventionGateway forIntervention() {
 		return new InterventionGatewayImpl();
+	}
+
+	@Override
+	public VoucherGateway forVoucher() {
+		return new VoucherGatewayImpl();
 	}
 
 }

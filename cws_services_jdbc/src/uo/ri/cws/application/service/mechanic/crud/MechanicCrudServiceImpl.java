@@ -11,7 +11,6 @@ import uo.ri.cws.application.service.mechanic.crud.commands.DeleteMechanic;
 import uo.ri.cws.application.service.mechanic.crud.commands.FindByIdMechanic;
 import uo.ri.cws.application.service.mechanic.crud.commands.FindByNifMechanic;
 import uo.ri.cws.application.service.mechanic.crud.commands.ListAllMechanic;
-import uo.ri.cws.application.service.mechanic.crud.commands.ListMechanic;
 import uo.ri.cws.application.service.mechanic.crud.commands.UpdateMechanic;
 import uo.ri.util.exception.BusinessException;
 
@@ -32,7 +31,7 @@ public class MechanicCrudServiceImpl implements MechanicCrudService {
 
 	@Override
 	public void update(MechanicDto dto) throws BusinessException {
-		new UpdateMechanic(dto).execute();
+		executor.execute(new UpdateMechanic(dto));
 	}
 
 	@Override
@@ -47,7 +46,7 @@ public class MechanicCrudServiceImpl implements MechanicCrudService {
 
 	@Override
 	public List<MechanicDto> findAll() throws BusinessException {
-		return new ListAllMechanic().execute();
+		return executor.execute(new ListAllMechanic());
 	}
 
 }
