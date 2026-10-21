@@ -2,13 +2,13 @@ package uo.ri.cws.application.persistence.voucher.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
 import uo.ri.cws.application.persistence.util.jdbc.Jdbc;
 import uo.ri.cws.application.persistence.voucher.VoucherGateway;
-import uo.ri.util.exception.BusinessException;
 import uo.ri.util.exception.PersistenceException;
 import uo.ri.util.jdbc.Queries;
 
@@ -45,10 +45,13 @@ public class VoucherGatewayImpl implements VoucherGateway {
     }
 
     @Override
-    public List<VoucherRecord> findVouchersByClientNif(String nif) {
+    public List<VoucherRecord> findVouchersByClientNif(String nif) throws PersistenceException {
         Connection c = Jdbc.getCurrentConnection();
-        try (PreparedStatement pst = c.prepareStatement(Queries.getSQLSentence(""))) {
-
+        try (PreparedStatement pst = c.prepareStatement(Queries.getSQLSentence("TVOUCHERS_FIND_BY_CLIENT_NIF"))) {
+            pst.setString(1, nif);
+            try (ResultSet rs = pst.executeQuery()) {
+                return new VoucherRecordAssembler().toRecordList(rs);
+            }
         } catch (SQLException e) {
             throw new PersistenceException(e);
         }

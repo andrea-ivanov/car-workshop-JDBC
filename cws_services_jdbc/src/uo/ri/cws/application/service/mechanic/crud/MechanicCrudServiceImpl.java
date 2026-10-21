@@ -25,7 +25,6 @@ public class MechanicCrudServiceImpl implements MechanicCrudService {
 
 	@Override
 	public void delete(String mechanicId) throws BusinessException {
-		// new DeleteMechanic(mechanicId).execute();
 		executor.execute(new DeleteMechanic(mechanicId));
 	}
 

@@ -2,13 +2,13 @@ package uo.ri.cws.application.service.invoice.create;
 
 import java.math.BigDecimal;
 
-
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 import uo.ri.cws.application.persistence.util.command.CommandExecutor;
 import uo.ri.cws.application.service.invoice.InvoicingService;
+import uo.ri.cws.application.service.invoice.create.commands.FindInvoiceByNumber;
 import uo.ri.cws.application.service.invoice.create.commands.FindNotInvoicedWorkOrdersByClient;
 import uo.ri.cws.application.service.invoice.create.commands.InvoiceWorkorder;
 import uo.ri.util.exception.BusinessException;
@@ -16,7 +16,7 @@ import uo.ri.util.exception.BusinessException;
 public class InvoicingServiceImpl implements InvoicingService {
 
 	private CommandExecutor executor = new CommandExecutor();
-	
+
 	@Override
 	public InvoiceDto create(List<String> workOrderIds) throws BusinessException {
 		return executor.execute(new InvoiceWorkorder(workOrderIds));
@@ -41,8 +41,7 @@ public class InvoicingServiceImpl implements InvoicingService {
 
 	@Override
 	public Optional<InvoiceDto> findInvoiceByNumber(Long number) throws BusinessException {
-		// TODO Auto-generated method stub
-		return Optional.empty();
+		return executor.execute(new FindInvoiceByNumber(number));
 	}
 
 	@Override
@@ -54,7 +53,7 @@ public class InvoicingServiceImpl implements InvoicingService {
 	@Override
 	public void settleInvoice(String invoiceId, Map<String, BigDecimal> charges) throws BusinessException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
