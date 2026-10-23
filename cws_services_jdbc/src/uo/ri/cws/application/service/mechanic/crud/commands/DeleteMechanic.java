@@ -17,14 +17,6 @@ import uo.ri.util.exception.BusinessException;
 
 public class DeleteMechanic implements Command<Void> {
 
-	// private static final String TMECHANICS_DELETE = "DELETE FROM TMECHANICS " +
-	// "WHERE ID = ?";
-	// private static final String TMECHANICS_FINDBYID = "select * from TMechanics
-	// where id = ?";
-	// private static final String TMECHANICS_INTERVENTIONS = "SELECT * FROM
-	// TInterventions WHERE mechanic_id = ?";
-	// private static final String TMECHANICS_WORKORDERS = "SELECT * FROM
-	// TWorkOrders WHERE mechanic_id = ?";
 	private String idMechanic;
 	private MechanicGateway mg = Factories.persistence.forMechanic();
 	private WorkOrderGateway wog = Factories.persistence.forWorkOrder();

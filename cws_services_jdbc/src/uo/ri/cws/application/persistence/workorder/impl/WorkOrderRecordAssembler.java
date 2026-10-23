@@ -14,12 +14,14 @@ public class WorkOrderRecordAssembler extends BaseRecordAssembler<WorkOrderRecor
 
 	@Override
 	public WorkOrderRecord toRecord(ResultSet rs) throws SQLException {
-		WorkOrderRecord wr = new WorkOrderRecord();
-		wr.id = rs.getString("id");
+		WorkOrderRecord wr = super.toRecord(rs);
+		wr.vehicleId = rs.getString("vehicle_id");
 		wr.description = rs.getString("description");
 		wr.date = rs.getTimestamp("date").toLocalDateTime();
-		wr.state = rs.getString("state");
 		wr.amount = rs.getBigDecimal("total_amount");
+		wr.state = rs.getString("state");
+		wr.mechanicId = rs.getString("mechanic_id");
+		wr.invoiceId = rs.getString("invoice_id");
 		return wr;
 	}
 

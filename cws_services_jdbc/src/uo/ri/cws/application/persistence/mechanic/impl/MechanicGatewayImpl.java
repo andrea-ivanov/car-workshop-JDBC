@@ -80,12 +80,12 @@ public class MechanicGatewayImpl implements MechanicGateway {
 	@Override
 	public List<MechanicRecord> findAll() throws PersistenceException {
 		Connection c = Jdbc.getCurrentConnection();
-		try (PreparedStatement pst = c.prepareStatement("TMECHANICS_FINDALL")) {
+		try (PreparedStatement pst = c.prepareStatement(Queries.getSQLSentence("TMECHANICS_FINDALL"))) {
 			try (ResultSet rs = pst.executeQuery();) {
 				return new MechanicRecordAssembler().toRecordList(rs);
 			}
 		} catch (SQLException e) {
-			throw new RuntimeException(e);
+			throw new PersistenceException(e);
 		}
 	}
 

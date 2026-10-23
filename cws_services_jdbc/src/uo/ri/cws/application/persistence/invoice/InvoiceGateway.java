@@ -12,6 +12,8 @@ public interface InvoiceGateway extends Gateway<InvoiceRecord> {
 
 	Optional<InvoiceRecord> findByNumber(Long number) throws PersistenceException;
 
+	Long getNextInvoiceNumber() throws PersistenceException;
+
 	public class InvoiceRecord extends Gateway.BaseRecord {
 		public BigDecimal total; // total amount, VAT included
 		public BigDecimal subtotal; // amount before VAT

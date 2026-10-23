@@ -10,6 +10,7 @@ import uo.ri.cws.application.persistence.util.command.CommandExecutor;
 import uo.ri.cws.application.service.invoice.InvoicingService;
 import uo.ri.cws.application.service.invoice.create.commands.FindInvoiceByNumber;
 import uo.ri.cws.application.service.invoice.create.commands.FindNotInvoicedWorkOrdersByClient;
+import uo.ri.cws.application.service.invoice.create.commands.FindPayMeansByClientNif;
 import uo.ri.cws.application.service.invoice.create.commands.InvoiceWorkorder;
 import uo.ri.util.exception.BusinessException;
 
@@ -46,8 +47,7 @@ public class InvoicingServiceImpl implements InvoicingService {
 
 	@Override
 	public List<PaymentMeanDto> findPayMeansByClientNif(String nif) throws BusinessException {
-		// TODO Auto-generated method stub
-		return null;
+		return executor.execute(new FindPayMeansByClientNif(nif));
 	}
 
 	@Override

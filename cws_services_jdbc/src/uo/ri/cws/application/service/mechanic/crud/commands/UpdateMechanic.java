@@ -7,10 +7,8 @@ import uo.ri.cws.application.persistence.mechanic.MechanicGateway;
 import uo.ri.cws.application.persistence.mechanic.MechanicGateway.MechanicRecord;
 import uo.ri.cws.application.persistence.util.command.Command;
 import uo.ri.cws.application.service.mechanic.MechanicCrudService.MechanicDto;
-import uo.ri.cws.application.service.mechanic.crud.MechanicDtoAssembler;
 import uo.ri.util.assertion.ArgumentChecks;
 import uo.ri.util.assertion.BusinessChecks;
-import uo.ri.util.console.Console;
 import uo.ri.util.exception.BusinessException;
 
 public class UpdateMechanic implements Command<Void> {
@@ -33,12 +31,15 @@ public class UpdateMechanic implements Command<Void> {
 		Optional<MechanicRecord> checkExists = mg.findById(dto.id);
 		BusinessChecks.isFalse(checkExists.isEmpty());
 
-		// update
-		MechanicRecord mr = MechanicDtoAssembler.toRecord(dto);
-		mg.update(mr);
+		MechanicRecord mr = checkExists.get();
+		BusinessChecks.hasVersion(dto.version, mr.version);
 
-		// Print result
-		Console.println("Mechanic updated");
+		// update con los id y versión del mecánico de la base de datos
+		mr.id = dto.id;
+		mr.version = mr.version;
+		mr.name = dto.name;
+		mr.surname = dto.surname;
+		mg.update(mr);
 
 		return null;
 	}

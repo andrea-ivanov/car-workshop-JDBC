@@ -16,8 +16,26 @@ public class InvoiceGatewayImpl implements InvoiceGateway {
 
 	@Override
 	public void add(InvoiceRecord t) throws PersistenceException {
-		// TODO Auto-generated method stub
-
+		Connection c = Jdbc.getCurrentConnection();
+		try (PreparedStatement pst = c.prepareStatement(Queries.getSQLSentence("TINVOICES_INSERT"))) {
+			java.sql.Timestamp now = new java.sql.Timestamp(System.currentTimeMillis());
+			pst.setString(1, t.id);
+			pst.setLong(2, t.version);
+			pst.setLong(3, t.number);
+			pst.setDate(4, java.sql.Date.valueOf(t.date));
+			pst.setString(5, t.state);
+			pst.setBigDecimal(6, t.subtotal);
+			pst.setBigDecimal(7, t.total);
+			pst.setBigDecimal(8, t.vatPercentage);
+			pst.setBigDecimal(9, t.vatAmount);
+			pst.setBoolean(10, t.usedForVoucher);
+			pst.setTimestamp(11, now);
+			pst.setTimestamp(12, now);
+			pst.setString(13, t.entityState);
+			pst.executeUpdate();
+		} catch (SQLException e) {
+			throw new PersistenceException(e);
+		}
 	}
 
 	@Override
@@ -62,6 +80,21 @@ public class InvoiceGatewayImpl implements InvoiceGateway {
 				return rs.next()
 						? Optional.of(new InvoiceRecordAssembler().toRecord(rs))
 						: Optional.empty();
+			}
+		} catch (SQLException e) {
+			throw new PersistenceException(e);
+		}
+	}
+
+	@Override
+	public Long getNextInvoiceNumber() throws PersistenceException {
+		Connection c = Jdbc.getCurrentConnection();
+		try (PreparedStatement pst = c.prepareStatement(Queries.getSQLSentence("TINVOICES_SELECT_LAST_NUMBER"))) {
+			try (ResultSet rs = pst.executeQuery()) {
+				if (rs.next()) {
+					return rs.getLong(1) + 1;
+				}
+				return 1L;
 			}
 		} catch (SQLException e) {
 			throw new PersistenceException(e);
