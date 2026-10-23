@@ -12,6 +12,7 @@ import uo.ri.cws.application.service.invoice.create.commands.FindInvoiceByNumber
 import uo.ri.cws.application.service.invoice.create.commands.FindNotInvoicedWorkOrdersByClient;
 import uo.ri.cws.application.service.invoice.create.commands.FindPayMeansByClientNif;
 import uo.ri.cws.application.service.invoice.create.commands.InvoiceWorkorder;
+import uo.ri.cws.application.service.invoice.create.commands.SettleInvoice;
 import uo.ri.util.exception.BusinessException;
 
 public class InvoicingServiceImpl implements InvoicingService {
@@ -52,8 +53,7 @@ public class InvoicingServiceImpl implements InvoicingService {
 
 	@Override
 	public void settleInvoice(String invoiceId, Map<String, BigDecimal> charges) throws BusinessException {
-		// TODO Auto-generated method stub
-
+		executor.execute(new SettleInvoice(invoiceId, charges));
 	}
 
 }

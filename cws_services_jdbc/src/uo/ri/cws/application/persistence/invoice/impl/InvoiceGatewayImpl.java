@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,8 +47,15 @@ public class InvoiceGatewayImpl implements InvoiceGateway {
 
 	@Override
 	public void update(InvoiceRecord t) throws PersistenceException {
-		// TODO Auto-generated method stub
-
+		Connection c = Jdbc.getCurrentConnection();
+		try (PreparedStatement pst = c.prepareStatement(Queries.getSQLSentence("TINVOICES_UPDATE"))) {
+			pst.setString(1, t.state);
+			pst.setTimestamp(2, new Timestamp(System.currentTimeMillis()));
+			pst.setString(3, t.id);
+			pst.executeUpdate();
+		} catch (SQLException e) {
+			throw new PersistenceException(e);
+		}
 	}
 
 	@Override

@@ -1,5 +1,7 @@
 package uo.ri.cws.application.persistence;
 
+import uo.ri.cws.application.persistence.charge.ChargeGateway;
+import uo.ri.cws.application.persistence.charge.impl.ChargeGatewayImpl;
 import uo.ri.cws.application.persistence.intervention.InterventionGateway;
 import uo.ri.cws.application.persistence.intervention.impl.InterventionGatewayImpl;
 import uo.ri.cws.application.persistence.invoice.InvoiceGateway;
@@ -43,6 +45,11 @@ public class PersistenceFactoryImpl implements PersistenceFactory {
 	@Override
 	public PaymentMeanGateway forPaymentMean() {
 		return new PaymentMeanGatewayImpl();
+	}
+
+	@Override
+	public ChargeGateway forCharge() {
+		return new ChargeGatewayImpl();
 	}
 
 }

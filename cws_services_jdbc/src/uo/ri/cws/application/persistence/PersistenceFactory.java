@@ -1,5 +1,6 @@
 package uo.ri.cws.application.persistence;
 
+import uo.ri.cws.application.persistence.charge.ChargeGateway;
 import uo.ri.cws.application.persistence.intervention.InterventionGateway;
 import uo.ri.cws.application.persistence.invoice.InvoiceGateway;
 import uo.ri.cws.application.persistence.mechanic.MechanicGateway;
@@ -21,9 +22,6 @@ public interface PersistenceFactory {
 
 	PaymentMeanGateway forPaymentMean();
 
-	// SparePartGateway forSparePart();
-	// SubstitutionGateway forSubstitutionsGateway();
-	// VehicleGateway forVehicle();
-	// VehicleTypeGateway forVehicleType();
+	ChargeGateway forCharge();
 
 }

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,14 +29,40 @@ public class PaymentMeanGatewayImpl implements PaymentMeanGateway {
 
     @Override
     public void update(PaymentMeanRecord t) throws PersistenceException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+        Connection c = Jdbc.getCurrentConnection();
+        try (PreparedStatement pst = c.prepareStatement(Queries.getSQLSentence("TPAYMENTMEANS_UPDATE"))) {
+            pst.setBigDecimal(1, t.accumulated);
+            pst.setTimestamp(2, new Timestamp(System.currentTimeMillis()));
+            pst.setString(3, t.id);
+            pst.executeUpdate();
+
+            if (t.dtype.equals("Voucher")) {
+                try (PreparedStatement pstVoucher = c
+                        .prepareStatement(Queries.getSQLSentence("TVOUCHERS_UPDATE_AVAILABLE"))) {
+                    pstVoucher.setBigDecimal(1, t.available);
+                    pstVoucher.setString(2, t.id);
+                    pstVoucher.executeUpdate();
+                }
+            }
+        } catch (SQLException e) {
+            throw new PersistenceException(e);
+        }
     }
 
     @Override
     public Optional<PaymentMeanRecord> findById(String id) throws PersistenceException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findById'");
+        Connection c = Jdbc.getCurrentConnection(); // fuera del try para que al salir no se cierre la conexión
+        try (PreparedStatement pst = c.prepareStatement(Queries.getSQLSentence("TPAYMENTMEANS_FIND_BY_ID"))) {
+            pst.setString(1, id);
+            try (ResultSet rs = pst.executeQuery()) {
+                return rs.next()
+                        ? Optional.of(new PaymentMeanRecordAssembler().toRecord(rs))
+                        : Optional.empty();
+            }
+
+        } catch (SQLException e) {
+            throw new PersistenceException(e);
+        }
     }
 
     @Override

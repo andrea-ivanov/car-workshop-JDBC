@@ -2,7 +2,6 @@ package uo.ri.cws.application.service.voucher.commands;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import uo.ri.conf.Factories;
 import uo.ri.cws.application.persistence.util.command.Command;
