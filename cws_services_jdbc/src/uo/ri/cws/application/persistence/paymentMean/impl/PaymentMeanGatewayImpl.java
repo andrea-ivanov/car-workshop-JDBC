@@ -1,4 +1,4 @@
-package uo.ri.cws.application.persistence.paymentMean.impl;
+package uo.ri.cws.application.persistence.paymentmean.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,7 +8,7 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
-import uo.ri.cws.application.persistence.paymentMean.PaymentMeanGateway;
+import uo.ri.cws.application.persistence.paymentmean.PaymentMeanGateway;
 import uo.ri.cws.application.persistence.util.jdbc.Jdbc;
 import uo.ri.util.exception.PersistenceException;
 import uo.ri.util.jdbc.Queries;
@@ -17,8 +17,20 @@ public class PaymentMeanGatewayImpl implements PaymentMeanGateway {
 
     @Override
     public void add(PaymentMeanRecord t) throws PersistenceException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'add'");
+        Connection c = Jdbc.getCurrentConnection();
+        try (PreparedStatement pst = c.prepareStatement(Queries.getSQLSentence("TPAYMENTMEANS_UPDATE"))) {
+            pst.setString(1, t.id);
+            pst.setString(2, t.dtype);
+            pst.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
+            pst.setString(4, t.entityState);
+            pst.setTimestamp(5, new Timestamp(System.currentTimeMillis()));
+            pst.setLong(6, t.version);
+            pst.setBigDecimal(7, t.accumulated);
+            pst.setString(8, t.client_id);
+
+        } catch (SQLException e) {
+            throw new PersistenceException(e);
+        }
     }
 
     @Override
@@ -35,15 +47,6 @@ public class PaymentMeanGatewayImpl implements PaymentMeanGateway {
             pst.setTimestamp(2, new Timestamp(System.currentTimeMillis()));
             pst.setString(3, t.id);
             pst.executeUpdate();
-
-            if (t.dtype.equals("Voucher")) {
-                try (PreparedStatement pstVoucher = c
-                        .prepareStatement(Queries.getSQLSentence("TVOUCHERS_UPDATE_AVAILABLE"))) {
-                    pstVoucher.setBigDecimal(1, t.available);
-                    pstVoucher.setString(2, t.id);
-                    pstVoucher.executeUpdate();
-                }
-            }
         } catch (SQLException e) {
             throw new PersistenceException(e);
         }

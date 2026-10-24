@@ -16,8 +16,16 @@ public class VoucherGatewayImpl implements VoucherGateway {
 
     @Override
     public void add(VoucherRecord t) throws PersistenceException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'add'");
+        Connection c = Jdbc.getCurrentConnection();
+        try (PreparedStatement pst = c.prepareStatement(Queries.getSQLSentence("TVOUCHERS_ADD"))) {
+            pst.setString(1, t.id);
+            pst.setString(2, t.code);
+            pst.setString(3, t.description);
+            pst.setBigDecimal(4, t.available);
+            pst.executeUpdate();
+        } catch (SQLException e) {
+            throw new PersistenceException(e);
+        }
     }
 
     @Override
@@ -28,14 +36,31 @@ public class VoucherGatewayImpl implements VoucherGateway {
 
     @Override
     public void update(VoucherRecord t) throws PersistenceException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+        Connection c = Jdbc.getCurrentConnection();
+        try (PreparedStatement pst = c.prepareStatement(Queries.getSQLSentence("TVOUCHERS_UPDATE"))) {
+            pst.setBigDecimal(1, t.available);
+            pst.setString(2, t.id);
+
+            pst.executeUpdate();
+        } catch (SQLException e) {
+            throw new PersistenceException(e);
+        }
     }
 
     @Override
     public Optional<VoucherRecord> findById(String id) throws PersistenceException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findById'");
+        Connection c = Jdbc.getCurrentConnection(); // fuera del try para que al salir no se cierre la conexión
+        try (PreparedStatement pst = c.prepareStatement(Queries.getSQLSentence("TVOUCHERS_FIND_BY_ID"))) {
+            pst.setString(1, id);
+            try (ResultSet rs = pst.executeQuery()) {
+                return rs.next()
+                        ? Optional.of(new VoucherRecordAssembler().toRecord(rs))
+                        : Optional.empty();
+            }
+
+        } catch (SQLException e) {
+            throw new PersistenceException(e);
+        }
     }
 
     @Override

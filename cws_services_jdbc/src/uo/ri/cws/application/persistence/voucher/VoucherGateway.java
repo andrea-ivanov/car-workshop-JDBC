@@ -4,18 +4,18 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import uo.ri.cws.application.persistence.Gateway;
+import uo.ri.cws.application.persistence.paymentmean.PaymentMeanGateway.PaymentMeanRecord;
 import uo.ri.cws.application.persistence.voucher.VoucherGateway.VoucherRecord;
+import uo.ri.util.exception.PersistenceException;
 
 public interface VoucherGateway extends Gateway<VoucherRecord> {
 
-    public class VoucherRecord extends Gateway.BaseRecord {
-        public String clientId;
-        public BigDecimal accumulatedAmount;
+    public List<VoucherRecord> findVouchersByClientNif(String nif) throws PersistenceException;
+
+    public class VoucherRecord extends PaymentMeanRecord {
         public String code;
         public String description;
-        public BigDecimal availableAmount;
+        public BigDecimal available;
     }
-
-    public List<VoucherRecord> findVouchersByClientNif(String nif);
 
 }

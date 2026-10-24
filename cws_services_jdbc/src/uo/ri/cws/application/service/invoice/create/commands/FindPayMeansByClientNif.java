@@ -4,9 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import uo.ri.conf.Factories;
-import uo.ri.cws.application.persistence.paymentMean.PaymentMeanGateway;
-import uo.ri.cws.application.persistence.paymentMean.PaymentMeanGateway.PaymentMeanRecord;
+import uo.ri.cws.application.persistence.creditcard.CreditCardGateway;
+import uo.ri.cws.application.persistence.creditcard.CreditCardGateway.CreditCardRecord;
+import uo.ri.cws.application.persistence.paymentmean.PaymentMeanGateway;
+import uo.ri.cws.application.persistence.paymentmean.PaymentMeanGateway.PaymentMeanRecord;
 import uo.ri.cws.application.persistence.util.command.Command;
+import uo.ri.cws.application.persistence.voucher.VoucherGateway;
+import uo.ri.cws.application.persistence.voucher.VoucherGateway.VoucherRecord;
 import uo.ri.cws.application.service.invoice.InvoicingService.PaymentMeanDto;
 import uo.ri.cws.application.service.invoice.create.PaymentMeanDtoAssembler;
 import uo.ri.util.assertion.ArgumentChecks;
@@ -16,6 +20,8 @@ public class FindPayMeansByClientNif implements Command<List<PaymentMeanDto>> {
 
     private String nif;
     private PaymentMeanGateway pmg = Factories.persistence.forPaymentMean();
+    private VoucherGateway vg = Factories.persistence.forVoucher();
+    private CreditCardGateway ccg = Factories.persistence.forCreditCard();
     private static final String LETTERS = "TRWAGMYFPDXBNJZSQVHLCKE";
 
     public FindPayMeansByClientNif(String nif) {
@@ -48,15 +54,20 @@ public class FindPayMeansByClientNif implements Command<List<PaymentMeanDto>> {
 
     @Override
     public List<PaymentMeanDto> execute() throws BusinessException {
-        List<PaymentMeanRecord> paymentsMeansRecords = pmg.findPayMeansByClientNif(nif);
-        List<PaymentMeanDto> paymentsMeansDtos = new ArrayList<PaymentMeanDto>();
-
-        for (PaymentMeanRecord record : paymentsMeansRecords) {
-            PaymentMeanDto dto = PaymentMeanDtoAssembler.toDto(record);
-            paymentsMeansDtos.add(dto);
+        List<PaymentMeanRecord> paymentMeanRecords = pmg.findPayMeansByClientNif(nif);
+        List<PaymentMeanDto> paymentMeanDtos = new ArrayList<>();
+        for (PaymentMeanRecord record : paymentMeanRecords) {
+            if ("CreditCard".equalsIgnoreCase(record.dtype)) {
+                CreditCardRecord cc = ccg.findById(record.id).get();
+                paymentMeanDtos.add(PaymentMeanDtoAssembler.toCardDto(cc));
+            } else if ("Voucher".equalsIgnoreCase(record.dtype)) {
+                VoucherRecord vr = vg.findById(record.id).get();
+                paymentMeanDtos.add(PaymentMeanDtoAssembler.toVoucherDto(vr));
+            } else {
+                paymentMeanDtos.add(PaymentMeanDtoAssembler.toCashDto(record));
+            }
         }
-
-        return paymentsMeansDtos;
+        return paymentMeanDtos;
     }
 
 }

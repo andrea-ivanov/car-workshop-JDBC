@@ -1,11 +1,10 @@
-package uo.ri.cws.application.persistence.paymentMean;
+package uo.ri.cws.application.persistence.paymentmean;
 
 import java.math.BigDecimal;
-import java.sql.Date;
 import java.util.List;
 
 import uo.ri.cws.application.persistence.Gateway;
-import uo.ri.cws.application.persistence.paymentMean.PaymentMeanGateway.PaymentMeanRecord;
+import uo.ri.cws.application.persistence.paymentmean.PaymentMeanGateway.PaymentMeanRecord;
 import uo.ri.util.exception.PersistenceException;
 
 public interface PaymentMeanGateway extends Gateway<PaymentMeanRecord> {
@@ -21,15 +20,5 @@ public interface PaymentMeanGateway extends Gateway<PaymentMeanRecord> {
         public String dtype;
         public BigDecimal accumulated;
         public String client_id;
-
-        // Para el caso de creditCard
-        public String cardNumber;
-        public String cardType;
-        public Date cardValidThru;
-
-        // Para el caso de bono
-        public String code;
-        public String description;
-        public BigDecimal available;
     }
 }

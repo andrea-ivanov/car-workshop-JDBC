@@ -35,8 +35,7 @@ public class UpdateMechanic implements Command<Void> {
 		BusinessChecks.hasVersion(dto.version, mr.version);
 
 		// update con los id y versión del mecánico de la base de datos
-		mr.id = dto.id;
-		mr.version = mr.version;
+		mr.nif = dto.nif;
 		mr.name = dto.name;
 		mr.surname = dto.surname;
 		mg.update(mr);

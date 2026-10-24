@@ -14,11 +14,6 @@ import uo.ri.util.exception.BusinessException;
 
 public class AddMechanic implements Command<MechanicDto> {
 
-	// private static final String TMECHANICS_ADD = "insert into TMechanics" + "(id,
-	// nif, name, surname, version, "
-	// + "createdAt, updatedAt, entityState) " + "values (?, ?, ?, ?, ?, ?, ?, ?)";
-	// private static final String TMECHANICS_FINDBYNIF = "select * from TMechanics
-	// where nif = ?";
 	private MechanicDto dto;
 	private MechanicGateway mg = Factories.persistence.forMechanic();
 
