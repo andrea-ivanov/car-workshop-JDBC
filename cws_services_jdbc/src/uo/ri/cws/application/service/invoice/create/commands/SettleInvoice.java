@@ -67,8 +67,8 @@ public class SettleInvoice implements Command<Void> {
             cr.id = UUID.randomUUID().toString();
             cr.version = 1L;
             cr.amount = amount;
-            cr.invoice_id = invoiceRecord.id;
-            cr.paymentMean_id = pm.id;
+            cr.invoiceId = invoiceRecord.id;
+            cr.paymentMeanId = pm.id;
             cr.entityState = "ENABLED";
             cg.add(cr);
 

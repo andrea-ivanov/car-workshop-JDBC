@@ -10,6 +10,7 @@ import java.util.Optional;
 import uo.ri.cws.application.persistence.intervention.InterventionGateway;
 import uo.ri.cws.application.persistence.util.assembler.BaseRecordAssembler;
 import uo.ri.cws.application.persistence.util.jdbc.Jdbc;
+import uo.ri.util.exception.NotYetImplementedException;
 import uo.ri.util.exception.PersistenceException;
 import uo.ri.util.jdbc.Queries;
 
@@ -17,32 +18,27 @@ public class InterventionGatewayImpl implements InterventionGateway {
 
     @Override
     public void add(InterventionRecord t) throws PersistenceException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'add'");
+        throw new NotYetImplementedException();
     }
 
     @Override
     public void remove(String id) throws PersistenceException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'remove'");
+        throw new NotYetImplementedException();
     }
 
     @Override
     public void update(InterventionRecord t) throws PersistenceException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+        throw new NotYetImplementedException();
     }
 
     @Override
     public Optional<InterventionRecord> findById(String id) throws PersistenceException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findById'");
+        throw new NotYetImplementedException();
     }
 
     @Override
     public List<InterventionRecord> findAll() throws PersistenceException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findAll'");
+        throw new NotYetImplementedException();
     }
 
     @Override

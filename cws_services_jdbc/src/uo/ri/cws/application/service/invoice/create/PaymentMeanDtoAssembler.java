@@ -41,7 +41,7 @@ public class PaymentMeanDtoAssembler {
     private static void fillCommonFields(PaymentMeanRecord record, PaymentMeanDto dto) {
         dto.id = record.id;
         dto.version = record.version;
-        dto.clientId = record.client_id;
+        dto.clientId = record.clientId;
         dto.accumulated = record.accumulated;
     }
 

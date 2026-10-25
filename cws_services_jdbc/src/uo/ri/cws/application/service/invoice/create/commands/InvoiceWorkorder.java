@@ -74,8 +74,9 @@ public class InvoiceWorkorder implements Command<InvoiceDto> {
 	 * @return
 	 */
 	private BigDecimal calculateVatAmount(BigDecimal subtotal, BigDecimal vatPercentage) {
-		BigDecimal vatAmount = subtotal.multiply(vatPercentage).divide(new BigDecimal("100"));
-		return vatAmount.setScale(2, RoundingMode.HALF_EVEN);
+		return subtotal.multiply(vatPercentage)
+				.divide(new BigDecimal("100"))
+				.setScale(2, RoundingMode.HALF_EVEN);
 	}
 
 	/**

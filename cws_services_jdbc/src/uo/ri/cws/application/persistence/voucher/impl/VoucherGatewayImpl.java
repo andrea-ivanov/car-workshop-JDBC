@@ -9,6 +9,7 @@ import java.util.Optional;
 
 import uo.ri.cws.application.persistence.util.jdbc.Jdbc;
 import uo.ri.cws.application.persistence.voucher.VoucherGateway;
+import uo.ri.util.exception.NotYetImplementedException;
 import uo.ri.util.exception.PersistenceException;
 import uo.ri.util.jdbc.Queries;
 
@@ -30,8 +31,7 @@ public class VoucherGatewayImpl implements VoucherGateway {
 
     @Override
     public void remove(String id) throws PersistenceException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'remove'");
+        throw new NotYetImplementedException();
     }
 
     @Override
@@ -65,8 +65,7 @@ public class VoucherGatewayImpl implements VoucherGateway {
 
     @Override
     public List<VoucherRecord> findAll() throws PersistenceException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findAll'");
+        throw new NotYetImplementedException();
     }
 
     @Override

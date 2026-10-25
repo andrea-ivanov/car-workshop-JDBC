@@ -14,6 +14,7 @@ import uo.ri.cws.application.service.invoice.create.commands.FindPayMeansByClien
 import uo.ri.cws.application.service.invoice.create.commands.InvoiceWorkorder;
 import uo.ri.cws.application.service.invoice.create.commands.SettleInvoice;
 import uo.ri.util.exception.BusinessException;
+import uo.ri.util.exception.NotYetImplementedException;
 
 public class InvoicingServiceImpl implements InvoicingService {
 
@@ -26,8 +27,7 @@ public class InvoicingServiceImpl implements InvoicingService {
 
 	@Override
 	public List<InvoicingWorkOrderDto> findWorkOrdersByClientNif(String nif) throws BusinessException {
-		// TODO Auto-generated method stub
-		return null;
+		throw new NotYetImplementedException();
 	}
 
 	@Override
@@ -37,8 +37,7 @@ public class InvoicingServiceImpl implements InvoicingService {
 
 	@Override
 	public List<InvoicingWorkOrderDto> findWorkOrdersByPlateNumber(String plate) throws BusinessException {
-		// TODO Auto-generated method stub
-		return null;
+		throw new NotYetImplementedException();
 	}
 
 	@Override

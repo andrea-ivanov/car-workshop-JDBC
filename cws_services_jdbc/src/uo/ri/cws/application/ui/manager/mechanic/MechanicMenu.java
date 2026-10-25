@@ -1,6 +1,10 @@
 package uo.ri.cws.application.ui.manager.mechanic;
 
-import uo.ri.cws.application.ui.manager.mechanic.action.*;
+import uo.ri.cws.application.ui.manager.mechanic.action.AddMechanicAction;
+import uo.ri.cws.application.ui.manager.mechanic.action.DeleteMechanicAction;
+import uo.ri.cws.application.ui.manager.mechanic.action.ListAllMechanicsAction;
+import uo.ri.cws.application.ui.manager.mechanic.action.ListMechanicAction;
+import uo.ri.cws.application.ui.manager.mechanic.action.UpdateMechanicAction;
 import uo.ri.util.menu.BaseMenu;
 
 public class MechanicMenu extends BaseMenu {

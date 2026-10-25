@@ -16,7 +16,7 @@ public class ClientRecordAssembler extends BaseRecordAssembler<ClientRecord> {
         ClientRecord cr = super.toRecord(rs);
         cr.city = rs.getString("city");
         cr.country = rs.getString("country");
-        cr.postalcode = rs.getString("postalcode");
+        cr.postalCode = rs.getString("postalcode");
         cr.street = rs.getString("street");
         cr.name = rs.getString("name");
         cr.surname = rs.getString("surname");

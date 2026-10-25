@@ -15,43 +15,38 @@ import uo.ri.cws.application.service.voucher.VoucherGenerationServiceImpl;
 import uo.ri.cws.application.service.workorder.CloseWorkOrderService;
 import uo.ri.cws.application.service.workorder.ViewAssignedWorkOrdersService;
 import uo.ri.cws.application.service.workorder.WorkOrderCrudService;
+import uo.ri.util.exception.NotYetImplementedException;
 
 public class ServiceFactoryImpl implements ServiceFactory {
 
 	@Override
 	public VehicleCrudService forVehicleCrudService() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new NotYetImplementedException();
 	}
 
 	@Override
 	public ClientCrudService forClientCrudService() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new NotYetImplementedException();
 	}
 
 	@Override
 	public ClientHistoryService forClientHistoryService() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new NotYetImplementedException();
 	}
 
 	@Override
 	public WorkOrderCrudService forWorkOrderCrudService() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new NotYetImplementedException();
 	}
 
 	@Override
 	public CloseWorkOrderService forClosingWorkOrder() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new NotYetImplementedException();
 	}
 
 	@Override
 	public ViewAssignedWorkOrdersService forViewAssignedWorkOrdersService() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new NotYetImplementedException();
 	}
 
 	@Override
@@ -61,14 +56,12 @@ public class ServiceFactoryImpl implements ServiceFactory {
 
 	@Override
 	public VehicleTypeCrudService forVehicleTypeCrudService() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new NotYetImplementedException();
 	}
 
 	@Override
 	public SparePartCrudService forSparePartCrudService() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new NotYetImplementedException();
 	}
 
 	@Override
@@ -83,8 +76,7 @@ public class ServiceFactoryImpl implements ServiceFactory {
 
 	@Override
 	public PaymentMeanCrudService forPaymentMeanCrudService() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new NotYetImplementedException();
 	}
 
 }

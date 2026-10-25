@@ -15,7 +15,7 @@ import uo.ri.util.exception.BusinessException;
 public class FindVouchersByClientNif implements Command<List<VoucherDto>> {
 
     private String nif;
-    VoucherGateway vg = Factories.persistence.forVoucher();
+    private VoucherGateway vg = Factories.persistence.forVoucher();
 
     public FindVouchersByClientNif(String nif) {
         ArgumentChecks.isNotNull(nif, "El nif del cliente no puede ser nulo");

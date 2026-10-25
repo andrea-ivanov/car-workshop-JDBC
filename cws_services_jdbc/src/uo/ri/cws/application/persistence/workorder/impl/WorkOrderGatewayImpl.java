@@ -11,6 +11,7 @@ import java.util.Optional;
 import uo.ri.cws.application.persistence.util.assembler.BaseRecordAssembler;
 import uo.ri.cws.application.persistence.util.jdbc.Jdbc;
 import uo.ri.cws.application.persistence.workorder.WorkOrderGateway;
+import uo.ri.util.exception.NotYetImplementedException;
 import uo.ri.util.exception.PersistenceException;
 import uo.ri.util.jdbc.Queries;
 
@@ -18,14 +19,12 @@ public class WorkOrderGatewayImpl implements WorkOrderGateway {
 
     @Override
     public void add(WorkOrderRecord t) throws PersistenceException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'add'");
+        throw new NotYetImplementedException();
     }
 
     @Override
     public void remove(String id) throws PersistenceException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'remove'");
+        throw new NotYetImplementedException();
     }
 
     @Override
@@ -60,8 +59,7 @@ public class WorkOrderGatewayImpl implements WorkOrderGateway {
 
     @Override
     public List<WorkOrderRecord> findAll() throws PersistenceException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findAll'");
+        throw new NotYetImplementedException();
     }
 
     @Override

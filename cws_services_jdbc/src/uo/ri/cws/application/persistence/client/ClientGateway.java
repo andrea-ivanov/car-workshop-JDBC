@@ -8,7 +8,7 @@ public interface ClientGateway extends Gateway<ClientRecord> {
     public class ClientRecord extends Gateway.BaseRecord {
         public String city;
         public String country;
-        public String postalcode;
+        public String postalCode;
         public String street;
         public String name;
         public String surname;

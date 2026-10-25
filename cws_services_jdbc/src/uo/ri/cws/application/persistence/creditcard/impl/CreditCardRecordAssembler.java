@@ -17,7 +17,7 @@ public class CreditCardRecordAssembler extends BaseRecordAssembler<CreditCardRec
         CreditCardRecord r = super.toRecord(rs);
         r.dtype = rs.getString("dtype");
         r.accumulated = rs.getBigDecimal("accumulated");
-        r.client_id = rs.getString("client_id");
+        r.clientId = rs.getString("client_id");
         r.number = rs.getString("number");
         r.type = rs.getString("type");
         r.validThru = rs.getDate("validthru");

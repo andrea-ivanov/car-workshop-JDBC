@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Optional;
 
 import uo.ri.cws.application.persistence.client.ClientGateway;
-import uo.ri.cws.application.persistence.mechanic.impl.MechanicRecordAssembler;
 import uo.ri.cws.application.persistence.util.jdbc.Jdbc;
+import uo.ri.util.exception.NotYetImplementedException;
 import uo.ri.util.exception.PersistenceException;
 import uo.ri.util.jdbc.Queries;
 
@@ -17,20 +17,17 @@ public class ClientGatewayImpl implements ClientGateway {
 
     @Override
     public void add(ClientRecord t) throws PersistenceException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'add'");
+        throw new NotYetImplementedException();
     }
 
     @Override
     public void remove(String id) throws PersistenceException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'remove'");
+        throw new NotYetImplementedException();
     }
 
     @Override
     public void update(ClientRecord t) throws PersistenceException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+        throw new NotYetImplementedException();
     }
 
     @Override

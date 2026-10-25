@@ -9,7 +9,7 @@ public class VoucherDtoAssembler {
         VoucherDto dto = new VoucherDto();
         dto.id = r.id;
         dto.version = r.version;
-        dto.clientId = r.client_id;
+        dto.clientId = r.clientId;
         dto.accumulatedAmount = r.accumulated;
         dto.code = r.code;
         dto.description = r.description;

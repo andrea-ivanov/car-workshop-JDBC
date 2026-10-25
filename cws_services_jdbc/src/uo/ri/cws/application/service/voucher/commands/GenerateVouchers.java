@@ -69,7 +69,7 @@ public class GenerateVouchers implements Command<int[]> {
         v.version = 1L;
         v.entityState = "ENABLED";
         v.dtype = "Voucher";
-        v.client_id = id;
+        v.clientId = id;
         v.accumulated = BigDecimal.ZERO;
         v.code = "B-" + UUID.randomUUID().toString();
         v.description = description;

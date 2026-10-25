@@ -9,6 +9,7 @@ import java.util.Optional;
 
 import uo.ri.cws.application.persistence.creditcard.CreditCardGateway;
 import uo.ri.cws.application.persistence.util.jdbc.Jdbc;
+import uo.ri.util.exception.NotYetImplementedException;
 import uo.ri.util.exception.PersistenceException;
 import uo.ri.util.jdbc.Queries;
 
@@ -16,20 +17,17 @@ public class CreditCardGatewayImpl implements CreditCardGateway {
 
     @Override
     public void add(CreditCardRecord t) throws PersistenceException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'add'");
+        throw new NotYetImplementedException();
     }
 
     @Override
     public void remove(String id) throws PersistenceException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'remove'");
+        throw new NotYetImplementedException();
     }
 
     @Override
     public void update(CreditCardRecord t) throws PersistenceException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+        throw new NotYetImplementedException();
     }
 
     @Override
@@ -50,8 +48,7 @@ public class CreditCardGatewayImpl implements CreditCardGateway {
 
     @Override
     public List<CreditCardRecord> findAll() throws PersistenceException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findAll'");
+        throw new NotYetImplementedException();
     }
 
 }

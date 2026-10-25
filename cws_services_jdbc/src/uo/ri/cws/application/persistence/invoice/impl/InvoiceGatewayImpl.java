@@ -10,6 +10,7 @@ import java.util.Optional;
 
 import uo.ri.cws.application.persistence.invoice.InvoiceGateway;
 import uo.ri.cws.application.persistence.util.jdbc.Jdbc;
+import uo.ri.util.exception.NotYetImplementedException;
 import uo.ri.util.exception.PersistenceException;
 import uo.ri.util.jdbc.Queries;
 
@@ -41,7 +42,7 @@ public class InvoiceGatewayImpl implements InvoiceGateway {
 
 	@Override
 	public void remove(String id) throws PersistenceException {
-		// TODO Auto-generated method stub
+		throw new NotYetImplementedException();
 
 	}
 
@@ -76,8 +77,7 @@ public class InvoiceGatewayImpl implements InvoiceGateway {
 
 	@Override
 	public List<InvoiceRecord> findAll() throws PersistenceException {
-		// TODO Auto-generated method stub
-		return null;
+		throw new NotYetImplementedException();
 	}
 
 	@Override

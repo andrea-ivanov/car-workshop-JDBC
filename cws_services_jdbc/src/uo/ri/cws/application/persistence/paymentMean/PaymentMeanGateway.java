@@ -14,6 +14,6 @@ public interface PaymentMeanGateway extends Gateway<PaymentMeanRecord> {
     public class PaymentMeanRecord extends Gateway.BaseRecord {
         public String dtype;
         public BigDecimal accumulated;
-        public String client_id;
+        public String clientId;
     }
 }

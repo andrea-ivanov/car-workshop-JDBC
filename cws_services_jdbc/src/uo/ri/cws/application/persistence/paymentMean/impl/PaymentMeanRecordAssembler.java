@@ -16,7 +16,7 @@ public class PaymentMeanRecordAssembler extends BaseRecordAssembler<PaymentMeanR
         PaymentMeanRecord pmr = super.toRecord(rs);
         pmr.dtype = rs.getString("dtype");
         pmr.accumulated = rs.getBigDecimal("accumulated");
-        pmr.client_id = rs.getString("client_id");
+        pmr.clientId = rs.getString("client_id");
         return pmr;
     }
 }

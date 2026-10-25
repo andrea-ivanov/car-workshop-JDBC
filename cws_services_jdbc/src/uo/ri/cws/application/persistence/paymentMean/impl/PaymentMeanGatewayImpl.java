@@ -10,6 +10,7 @@ import java.util.Optional;
 
 import uo.ri.cws.application.persistence.paymentmean.PaymentMeanGateway;
 import uo.ri.cws.application.persistence.util.jdbc.Jdbc;
+import uo.ri.util.exception.NotYetImplementedException;
 import uo.ri.util.exception.PersistenceException;
 import uo.ri.util.jdbc.Queries;
 
@@ -26,7 +27,7 @@ public class PaymentMeanGatewayImpl implements PaymentMeanGateway {
             pst.setTimestamp(5, new Timestamp(System.currentTimeMillis()));
             pst.setLong(6, t.version);
             pst.setBigDecimal(7, t.accumulated);
-            pst.setString(8, t.client_id);
+            pst.setString(8, t.clientId);
             pst.executeUpdate();
         } catch (SQLException e) {
             throw new PersistenceException(e);
@@ -35,8 +36,7 @@ public class PaymentMeanGatewayImpl implements PaymentMeanGateway {
 
     @Override
     public void remove(String id) throws PersistenceException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'remove'");
+        throw new NotYetImplementedException();
     }
 
     @Override
@@ -70,8 +70,7 @@ public class PaymentMeanGatewayImpl implements PaymentMeanGateway {
 
     @Override
     public List<PaymentMeanRecord> findAll() throws PersistenceException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findAll'");
+        throw new NotYetImplementedException();
     }
 
     @Override
