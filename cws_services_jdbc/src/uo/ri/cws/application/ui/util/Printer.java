@@ -5,6 +5,8 @@ import java.util.List;
 import uo.ri.cws.application.service.invoice.InvoicingService.InvoiceDto;
 import uo.ri.cws.application.service.invoice.InvoicingService.PaymentMeanDto;
 import uo.ri.cws.application.service.mechanic.MechanicCrudService.MechanicDto;
+import uo.ri.cws.application.service.paymentmean.VoucherGenerationService.VoucherDto;
+import uo.ri.cws.application.service.paymentmean.VoucherGenerationService.VoucherSummaryDto;
 import uo.ri.cws.application.service.vehicletype.VehicleTypeCrudService.VehicleTypeDto;
 import uo.ri.cws.application.service.workorder.WorkOrderCrudService.WorkOrderDto;
 import uo.ri.util.console.Console;
@@ -56,6 +58,17 @@ public class Printer {
 
 		Console.printf("%s for vehicle %s\n\t%-25.25s\n\t%tm/%<td/%<tY\n\t%s\n", wo.id, wo.vehicleId, wo.description,
 				wo.date, wo.state);
+	}
+
+	public static void printVoucherSummary(VoucherSummaryDto vs) {
+		Console.printf("\t%s \t%-15.15s \t%-25.25s \t%d \t%.2f € \t%.2f € \t%.2f €\n",
+				vs.nif(), vs.name(), vs.surname(), vs.issuedQty(),
+				vs.totalAmount(), vs.consumedAmount(), vs.availableAmount());
+	}
+
+	public static void printVoucher(VoucherDto v) {
+		Console.printf("\t%s \t%-25.25s \t%.2f € \t%.2f €\n",
+				v.code, v.description, v.availableAmount, v.accumulatedAmount);
 	}
 
 }

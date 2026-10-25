@@ -1,6 +1,7 @@
 package uo.ri.cws.application.persistence;
 
 import uo.ri.cws.application.persistence.charge.ChargeGateway;
+import uo.ri.cws.application.persistence.client.ClientGateway;
 import uo.ri.cws.application.persistence.creditcard.CreditCardGateway;
 import uo.ri.cws.application.persistence.intervention.InterventionGateway;
 import uo.ri.cws.application.persistence.invoice.InvoiceGateway;
@@ -27,4 +28,5 @@ public interface PersistenceFactory {
 
 	CreditCardGateway forCreditCard();
 
+	ClientGateway forClient();
 }

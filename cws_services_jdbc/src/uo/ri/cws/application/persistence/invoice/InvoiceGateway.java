@@ -2,6 +2,7 @@ package uo.ri.cws.application.persistence.invoice;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 import uo.ri.cws.application.persistence.Gateway;
@@ -11,6 +12,8 @@ import uo.ri.util.exception.PersistenceException;
 public interface InvoiceGateway extends Gateway<InvoiceRecord> {
 
 	Optional<InvoiceRecord> findByNumber(Long number) throws PersistenceException;
+
+	List<InvoiceRecord> findPaidAndUsedOver500ByClientId(String id) throws PersistenceException;
 
 	Long getNextInvoiceNumber() throws PersistenceException;
 

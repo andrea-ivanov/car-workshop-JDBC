@@ -20,7 +20,7 @@ import uo.ri.util.menu.Action;
 
 public class SettleInvoiceAction implements Action {
 
-	InvoicingService iService = Factories.service.forCreateInvoiceService();
+	private InvoicingService iService = Factories.service.forCreateInvoiceService();
 
 	/**
 	 * Algorithm: - Ask user invoice number - Retrieve invoice info - Display
@@ -41,8 +41,6 @@ public class SettleInvoiceAction implements Action {
 		Optional<InvoiceDto> oInvoiceDto = iService.findInvoiceByNumber(number);
 		UserInteractionChecks.exists(oInvoiceDto, "No existe la factura");
 		InvoiceDto invoiceDto = oInvoiceDto.get();
-
-		UserInteractionChecks.isTrue(invoiceDto.state.equals("ISSUED"), "La factura ya esta pagada");
 
 		Printer.printInvoice(invoiceDto);
 

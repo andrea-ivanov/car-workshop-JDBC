@@ -51,7 +51,8 @@ public class InvoiceGatewayImpl implements InvoiceGateway {
 		try (PreparedStatement pst = c.prepareStatement(Queries.getSQLSentence("TINVOICES_UPDATE"))) {
 			pst.setString(1, t.state);
 			pst.setTimestamp(2, new Timestamp(System.currentTimeMillis()));
-			pst.setString(3, t.id);
+			pst.setBoolean(3, t.usedForVoucher);
+			pst.setString(4, t.id);
 			pst.executeUpdate();
 		} catch (SQLException e) {
 			throw new PersistenceException(e);
@@ -103,6 +104,20 @@ public class InvoiceGatewayImpl implements InvoiceGateway {
 					return rs.getLong(1) + 1;
 				}
 				return 1L;
+			}
+		} catch (SQLException e) {
+			throw new PersistenceException(e);
+		}
+	}
+
+	@Override
+	public List<InvoiceRecord> findPaidAndUsedOver500ByClientId(String id) throws PersistenceException {
+		Connection c = Jdbc.getCurrentConnection();
+		try (PreparedStatement pst = c
+				.prepareStatement(Queries.getSQLSentence("TINVOICES_FIND_PAID_AND_UNUSED_OVER_500_BY_CLIENT_ID"))) {
+			pst.setString(1, id);
+			try (ResultSet rs = pst.executeQuery();) {
+				return new InvoiceRecordAssembler().toRecordList(rs);
 			}
 		} catch (SQLException e) {
 			throw new PersistenceException(e);

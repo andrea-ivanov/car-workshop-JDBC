@@ -5,6 +5,8 @@ import java.util.List;
 import uo.ri.cws.application.persistence.util.command.CommandExecutor;
 import uo.ri.cws.application.service.paymentmean.VoucherGenerationService;
 import uo.ri.cws.application.service.voucher.commands.FindVouchersByClientNif;
+import uo.ri.cws.application.service.voucher.commands.GenerateVouchers;
+import uo.ri.cws.application.service.voucher.commands.GetVoucherSummay;
 import uo.ri.util.exception.BusinessException;
 
 public class VoucherGenerationServiceImpl implements VoucherGenerationService {
@@ -13,8 +15,7 @@ public class VoucherGenerationServiceImpl implements VoucherGenerationService {
 
     @Override
     public int[] generateVouchers() throws BusinessException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'generateVouchers'");
+        return executor.execute(new GenerateVouchers());
     }
 
     @Override
@@ -24,8 +25,7 @@ public class VoucherGenerationServiceImpl implements VoucherGenerationService {
 
     @Override
     public List<VoucherSummaryDto> getVoucherSummary() throws BusinessException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getVoucherSummary'");
+        return executor.execute(new GetVoucherSummay());
     }
 
 }

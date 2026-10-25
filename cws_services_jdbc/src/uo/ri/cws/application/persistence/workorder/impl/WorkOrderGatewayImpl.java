@@ -35,7 +35,8 @@ public class WorkOrderGatewayImpl implements WorkOrderGateway {
             pst.setString(1, t.invoiceId);
             pst.setString(2, t.state);
             pst.setTimestamp(3, new java.sql.Timestamp(System.currentTimeMillis()));
-            pst.setString(4, t.id);
+            pst.setBoolean(4, t.usedForVoucher);
+            pst.setString(5, t.id);
             pst.executeUpdate();
         } catch (SQLException e) {
             throw new PersistenceException(e);
@@ -83,6 +84,23 @@ public class WorkOrderGatewayImpl implements WorkOrderGateway {
 
         try (PreparedStatement pst = c.prepareStatement(Queries.getSQLSentence("TWORKORDERS_FIND_NOT_INVOICED"))) {
             pst.setString(1, nif);
+
+            try (ResultSet rs = pst.executeQuery()) {
+                return new WorkOrderRecordAssembler().toRecordList(rs);
+            }
+
+        } catch (SQLException e) {
+            throw new PersistenceException(e);
+        }
+    }
+
+    @Override
+    public List<WorkOrderRecord> findPaidAndUnusedByClientId(String id) throws PersistenceException {
+        Connection c = Jdbc.getCurrentConnection(); // fuera del try para que al salir no se cierre la conexión
+
+        try (PreparedStatement pst = c
+                .prepareStatement(Queries.getSQLSentence("TWORKORDERS_FIND_PAID_AND_UNUSED_BY_CLIENT_ID"))) {
+            pst.setString(1, id);
 
             try (ResultSet rs = pst.executeQuery()) {
                 return new WorkOrderRecordAssembler().toRecordList(rs);

@@ -22,6 +22,7 @@ public class WorkOrderRecordAssembler extends BaseRecordAssembler<WorkOrderRecor
 		wr.state = rs.getString("state");
 		wr.mechanicId = rs.getString("mechanic_id");
 		wr.invoiceId = rs.getString("invoice_id");
+		wr.usedForVoucher = rs.getBoolean("usedforvoucher");
 		return wr;
 	}
 

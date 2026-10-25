@@ -18,7 +18,7 @@ public class PaymentMeanGatewayImpl implements PaymentMeanGateway {
     @Override
     public void add(PaymentMeanRecord t) throws PersistenceException {
         Connection c = Jdbc.getCurrentConnection();
-        try (PreparedStatement pst = c.prepareStatement(Queries.getSQLSentence("TPAYMENTMEANS_UPDATE"))) {
+        try (PreparedStatement pst = c.prepareStatement(Queries.getSQLSentence("TPAYMENTMEANS_ADD"))) {
             pst.setString(1, t.id);
             pst.setString(2, t.dtype);
             pst.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
@@ -27,7 +27,7 @@ public class PaymentMeanGatewayImpl implements PaymentMeanGateway {
             pst.setLong(6, t.version);
             pst.setBigDecimal(7, t.accumulated);
             pst.setString(8, t.client_id);
-
+            pst.executeUpdate();
         } catch (SQLException e) {
             throw new PersistenceException(e);
         }

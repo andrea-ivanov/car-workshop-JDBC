@@ -11,11 +11,6 @@ public interface PaymentMeanGateway extends Gateway<PaymentMeanRecord> {
 
     public List<PaymentMeanRecord> findPayMeansByClientNif(String nif) throws PersistenceException;
 
-    /**
-     * Aquellos atributos que no pertenezcan a la entidad del tipo de pago que se
-     * está utilizando quedan a null
-     * PaymentMeanRecord
-     */
     public class PaymentMeanRecord extends Gateway.BaseRecord {
         public String dtype;
         public BigDecimal accumulated;
