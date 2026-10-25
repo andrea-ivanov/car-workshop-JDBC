@@ -13,32 +13,32 @@ import uo.ri.util.exception.BusinessException;
 
 public class FindNotInvoicedWorkOrdersByClient implements Command<List<InvoicingWorkOrderDto>> {
 
-	private String nif;
-	private WorkOrderGateway wg = Factories.persistence.forWorkOrder();
+    private String nif;
+    private WorkOrderGateway wg = Factories.persistence.forWorkOrder();
 
-	public FindNotInvoicedWorkOrdersByClient(String nif) {
-		NifChecks.checkValidNif(nif);
-		this.nif = nif;
-	}
+    public FindNotInvoicedWorkOrdersByClient(String nif) {
+        NifChecks.checkValidNif(nif);
+        this.nif = nif;
+    }
 
-	@Override
-	public List<InvoicingWorkOrderDto> execute() throws BusinessException {
+    @Override
+    public List<InvoicingWorkOrderDto> execute() throws BusinessException {
 
-		List<WorkOrderRecord> listWorkOrders = wg.findNotInvoicedWorkOrdersByClient(nif);
-		// transformamos al dto
-		List<InvoicingWorkOrderDto> workOrderDtos = new ArrayList<InvoicingWorkOrderDto>();
-		for (WorkOrderRecord wr : listWorkOrders) {
-			InvoicingWorkOrderDto dto = new InvoicingWorkOrderDto();
-			dto.id = wr.id;
-			dto.description = wr.description;
-			dto.date = wr.date;
-			dto.state = wr.state;
-			dto.amount = wr.amount;
+        List<WorkOrderRecord> listWorkOrders = wg.findNotInvoicedWorkOrdersByClient(nif);
+        // transformamos al dto
+        List<InvoicingWorkOrderDto> workOrderDtos = new ArrayList<InvoicingWorkOrderDto>();
+        for (WorkOrderRecord wr : listWorkOrders) {
+            InvoicingWorkOrderDto dto = new InvoicingWorkOrderDto();
+            dto.id = wr.id;
+            dto.description = wr.description;
+            dto.date = wr.date;
+            dto.state = wr.state;
+            dto.amount = wr.amount;
 
-			workOrderDtos.add(dto);
-		}
+            workOrderDtos.add(dto);
+        }
 
-		return workOrderDtos;
-	}
+        return workOrderDtos;
+    }
 
 }

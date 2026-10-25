@@ -21,49 +21,49 @@ import uo.ri.cws.application.persistence.workorder.impl.WorkOrderGatewayImpl;
 
 public class PersistenceFactoryImpl implements PersistenceFactory {
 
-	@Override
-	public MechanicGateway forMechanic() {
-		return new MechanicGatewayImpl();
-	}
+    @Override
+    public MechanicGateway forMechanic() {
+        return new MechanicGatewayImpl();
+    }
 
-	@Override
-	public WorkOrderGateway forWorkOrder() {
-		return new WorkOrderGatewayImpl();
-	}
+    @Override
+    public WorkOrderGateway forWorkOrder() {
+        return new WorkOrderGatewayImpl();
+    }
 
-	@Override
-	public InvoiceGateway forInvoice() {
-		return new InvoiceGatewayImpl();
-	}
+    @Override
+    public InvoiceGateway forInvoice() {
+        return new InvoiceGatewayImpl();
+    }
 
-	@Override
-	public InterventionGateway forIntervention() {
-		return new InterventionGatewayImpl();
-	}
+    @Override
+    public InterventionGateway forIntervention() {
+        return new InterventionGatewayImpl();
+    }
 
-	@Override
-	public VoucherGateway forVoucher() {
-		return new VoucherGatewayImpl();
-	}
+    @Override
+    public VoucherGateway forVoucher() {
+        return new VoucherGatewayImpl();
+    }
 
-	@Override
-	public PaymentMeanGateway forPaymentMean() {
-		return new PaymentMeanGatewayImpl();
-	}
+    @Override
+    public PaymentMeanGateway forPaymentMean() {
+        return new PaymentMeanGatewayImpl();
+    }
 
-	@Override
-	public ChargeGateway forCharge() {
-		return new ChargeGatewayImpl();
-	}
+    @Override
+    public ChargeGateway forCharge() {
+        return new ChargeGatewayImpl();
+    }
 
-	@Override
-	public CreditCardGateway forCreditCard() {
-		return new CreditCardGatewayImpl();
-	}
+    @Override
+    public CreditCardGateway forCreditCard() {
+        return new CreditCardGatewayImpl();
+    }
 
-	@Override
-	public ClientGateway forClient() {
-		return new ClientGatewayImpl();
-	}
+    @Override
+    public ClientGateway forClient() {
+        return new ClientGatewayImpl();
+    }
 
 }

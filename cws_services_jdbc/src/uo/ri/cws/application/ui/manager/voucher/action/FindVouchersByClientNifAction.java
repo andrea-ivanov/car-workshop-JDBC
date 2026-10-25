@@ -30,7 +30,7 @@ public class FindVouchersByClientNifAction implements Action {
 
         BigDecimal totalAmount = totalAvailable.add(totalConsumed);
         Console.printf("\tTotal Bonos: %d \tImporte total: %.2f € \tCosumido: %.2f € \tDisponible: %.2f €",
-                vouchers.size(), totalAmount, totalConsumed, totalAvailable);
+            vouchers.size(), totalAmount, totalConsumed, totalAvailable);
     }
 
 }

@@ -1,7 +1,6 @@
 package uo.ri.cws.application.persistence.util.command;
 
 import java.sql.Connection;
-
 import java.sql.SQLException;
 
 import uo.ri.cws.application.persistence.util.jdbc.Jdbc;

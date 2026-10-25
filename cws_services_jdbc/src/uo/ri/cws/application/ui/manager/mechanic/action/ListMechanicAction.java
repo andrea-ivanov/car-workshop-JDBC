@@ -12,19 +12,19 @@ import uo.ri.util.menu.Action;
 
 public class ListMechanicAction implements Action {
 
-	private MechanicCrudService service = Factories.service.forMechanicCrudService();
+    private MechanicCrudService service = Factories.service.forMechanicCrudService();
 
-	@Override
-	public void execute() throws BusinessException {
+    @Override
+    public void execute() throws BusinessException {
 
-		// Get info
-		String nif = Console.readString("nif");
+        // Get info
+        String nif = Console.readString("nif");
 
-		Optional<MechanicDto> dto = service.findByNif(nif);
+        Optional<MechanicDto> dto = service.findByNif(nif);
 
-		if (dto.isPresent())
-			Printer.printMechanic(dto.get());
-		else
-			Console.println("Mecánico no encontrado");
-	}
+        if (dto.isPresent())
+            Printer.printMechanic(dto.get());
+        else
+            Console.println("Mecánico no encontrado");
+    }
 }

@@ -14,29 +14,29 @@ import uo.ri.util.exception.BusinessException;
 
 public class AddMechanic implements Command<MechanicDto> {
 
-	private MechanicDto dto;
-	private MechanicGateway mg = Factories.persistence.forMechanic();
+    private MechanicDto dto;
+    private MechanicGateway mg = Factories.persistence.forMechanic();
 
-	public AddMechanic(MechanicDto dto) throws BusinessException {
-		ArgumentChecks.isNotNull(dto, "The mechanic cannot be null");
-		ArgumentChecks.isNotBlank(dto.nif, "The nif cannot be blank or null");
-		ArgumentChecks.isNotBlank(dto.name, "The name cannot be blank or null");
-		ArgumentChecks.isNotBlank(dto.surname, "The surname cannot be blank or null");
-		this.dto = dto;
-	}
+    public AddMechanic(MechanicDto dto) throws BusinessException {
+        ArgumentChecks.isNotNull(dto, "The mechanic cannot be null");
+        ArgumentChecks.isNotBlank(dto.nif, "The nif cannot be blank or null");
+        ArgumentChecks.isNotBlank(dto.name, "The name cannot be blank or null");
+        ArgumentChecks.isNotBlank(dto.surname, "The surname cannot be blank or null");
+        this.dto = dto;
+    }
 
-	public MechanicDto execute() throws BusinessException {
+    public MechanicDto execute() throws BusinessException {
 
-		Optional<MechanicRecord> check = mg.findByNif(dto.nif);
-		BusinessChecks.isTrue(check.isEmpty(), "Ya existe un mecanico con nif " + dto.nif);
+        Optional<MechanicRecord> check = mg.findByNif(dto.nif);
+        BusinessChecks.isTrue(check.isEmpty(), "Ya existe un mecanico con nif " + dto.nif);
 
-		MechanicRecord record = MechanicDtoAssembler.toRecord(dto);
-		mg.add(record);
+        MechanicRecord record = MechanicDtoAssembler.toRecord(dto);
+        mg.add(record);
 
-		dto.id = record.id;
-		dto.version = record.version;
+        dto.id = record.id;
+        dto.version = record.version;
 
-		return dto;
-	}
+        return dto;
+    }
 
 }

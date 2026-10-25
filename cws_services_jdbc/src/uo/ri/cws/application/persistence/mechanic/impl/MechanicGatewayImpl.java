@@ -15,95 +15,91 @@ import uo.ri.util.jdbc.Queries;
 
 public class MechanicGatewayImpl implements MechanicGateway {
 
-	@Override
-	public void add(MechanicRecord t) throws PersistenceException {
-		Connection c = Jdbc.getCurrentConnection(); // fuera del try para que al salir no se cierre la conexión
-		try (PreparedStatement pst = c.prepareStatement(Queries.getSQLSentence("TMECHANICS_ADD"))) {
-			pst.setString(1, t.id);
-			pst.setString(2, t.nif);
-			pst.setString(3, t.name);
-			pst.setString(4, t.surname);
-			pst.setLong(5, t.version);
-			pst.setTimestamp(6, new Timestamp(System.currentTimeMillis()));
-			pst.setTimestamp(7, new Timestamp(System.currentTimeMillis()));
-			pst.setString(8, t.entityState);
+    @Override
+    public void add(MechanicRecord t) throws PersistenceException {
+        Connection c = Jdbc.getCurrentConnection(); // fuera del try para que al salir no se cierre la conexión
+        try (PreparedStatement pst = c.prepareStatement(Queries.getSQLSentence("TMECHANICS_ADD"))) {
+            pst.setString(1, t.id);
+            pst.setString(2, t.nif);
+            pst.setString(3, t.name);
+            pst.setString(4, t.surname);
+            pst.setLong(5, t.version);
+            pst.setTimestamp(6, new Timestamp(System.currentTimeMillis()));
+            pst.setTimestamp(7, new Timestamp(System.currentTimeMillis()));
+            pst.setString(8, t.entityState);
 
-			pst.executeUpdate();
+            pst.executeUpdate();
 
-		} catch (SQLException e) {
-			throw new PersistenceException(e);
-		}
-	}
+        } catch (SQLException e) {
+            throw new PersistenceException(e);
+        }
+    }
 
-	@Override
-	public void remove(String id) throws PersistenceException {
-		Connection c = Jdbc.getCurrentConnection(); // fuera del try para que al salir no se cierre la conexión
-		try (PreparedStatement pst = c.prepareStatement(Queries.getSQLSentence("TMECHANICS_DELETE"))) {
-			pst.setString(1, id);
-			pst.executeUpdate();
-		} catch (SQLException e) {
-			throw new PersistenceException(e);
-		}
-	}
+    @Override
+    public void remove(String id) throws PersistenceException {
+        Connection c = Jdbc.getCurrentConnection(); // fuera del try para que al salir no se cierre la conexión
+        try (PreparedStatement pst = c.prepareStatement(Queries.getSQLSentence("TMECHANICS_DELETE"))) {
+            pst.setString(1, id);
+            pst.executeUpdate();
+        } catch (SQLException e) {
+            throw new PersistenceException(e);
+        }
+    }
 
-	@Override
-	public void update(MechanicRecord t) throws PersistenceException {
-		Connection c = Jdbc.getCurrentConnection();
-		try (PreparedStatement pst = c.prepareStatement(Queries.getSQLSentence("TMECHANICS_UPDATE"))) {
-			pst.setString(1, t.nif);
-			pst.setString(2, t.name);
-			pst.setString(3, t.surname);
-			pst.setTimestamp(4, new Timestamp(System.currentTimeMillis()));
-			pst.setString(5, t.id);
+    @Override
+    public void update(MechanicRecord t) throws PersistenceException {
+        Connection c = Jdbc.getCurrentConnection();
+        try (PreparedStatement pst = c.prepareStatement(Queries.getSQLSentence("TMECHANICS_UPDATE"))) {
+            pst.setString(1, t.nif);
+            pst.setString(2, t.name);
+            pst.setString(3, t.surname);
+            pst.setTimestamp(4, new Timestamp(System.currentTimeMillis()));
+            pst.setString(5, t.id);
 
-			pst.executeUpdate();
-		} catch (SQLException e) {
-			throw new PersistenceException(e);
-		}
-	}
+            pst.executeUpdate();
+        } catch (SQLException e) {
+            throw new PersistenceException(e);
+        }
+    }
 
-	@Override
-	public Optional<MechanicRecord> findById(String id) throws PersistenceException {
-		Connection c = Jdbc.getCurrentConnection(); // fuera del try para que al salir no se cierre la conexión
-		try (PreparedStatement pst = c.prepareStatement(Queries.getSQLSentence("TMECHANICS_FINDBYID"))) {
-			pst.setString(1, id);
-			try (ResultSet rs = pst.executeQuery()) {
-				return rs.next()
-						? Optional.of(new MechanicRecordAssembler().toRecord(rs))
-						: Optional.empty();
-			}
+    @Override
+    public Optional<MechanicRecord> findById(String id) throws PersistenceException {
+        Connection c = Jdbc.getCurrentConnection(); // fuera del try para que al salir no se cierre la conexión
+        try (PreparedStatement pst = c.prepareStatement(Queries.getSQLSentence("TMECHANICS_FINDBYID"))) {
+            pst.setString(1, id);
+            try (ResultSet rs = pst.executeQuery()) {
+                return rs.next() ? Optional.of(new MechanicRecordAssembler().toRecord(rs)) : Optional.empty();
+            }
 
-		} catch (SQLException e) {
-			throw new PersistenceException(e);
-		}
-	}
+        } catch (SQLException e) {
+            throw new PersistenceException(e);
+        }
+    }
 
-	@Override
-	public List<MechanicRecord> findAll() throws PersistenceException {
-		Connection c = Jdbc.getCurrentConnection();
-		try (PreparedStatement pst = c.prepareStatement(Queries.getSQLSentence("TMECHANICS_FINDALL"))) {
-			try (ResultSet rs = pst.executeQuery();) {
-				return new MechanicRecordAssembler().toRecordList(rs);
-			}
-		} catch (SQLException e) {
-			throw new PersistenceException(e);
-		}
-	}
+    @Override
+    public List<MechanicRecord> findAll() throws PersistenceException {
+        Connection c = Jdbc.getCurrentConnection();
+        try (PreparedStatement pst = c.prepareStatement(Queries.getSQLSentence("TMECHANICS_FINDALL"))) {
+            try (ResultSet rs = pst.executeQuery();) {
+                return new MechanicRecordAssembler().toRecordList(rs);
+            }
+        } catch (SQLException e) {
+            throw new PersistenceException(e);
+        }
+    }
 
-	@Override
-	public Optional<MechanicRecord> findByNif(String nif) throws PersistenceException {
-		Connection c = Jdbc.getCurrentConnection(); // fuera del try para que al salir no se cierre la conexión
-		try (PreparedStatement pst = c.prepareStatement(Queries.getSQLSentence("TMECHANICS_FINDBYNIF"))) {
-			pst.setString(1, nif);
-			try (ResultSet rs = pst.executeQuery()) {
-				return rs.next()
-						? Optional.of(new MechanicRecordAssembler().toRecord(rs))
-						: Optional.empty();
-			}
+    @Override
+    public Optional<MechanicRecord> findByNif(String nif) throws PersistenceException {
+        Connection c = Jdbc.getCurrentConnection(); // fuera del try para que al salir no se cierre la conexión
+        try (PreparedStatement pst = c.prepareStatement(Queries.getSQLSentence("TMECHANICS_FINDBYNIF"))) {
+            pst.setString(1, nif);
+            try (ResultSet rs = pst.executeQuery()) {
+                return rs.next() ? Optional.of(new MechanicRecordAssembler().toRecord(rs)) : Optional.empty();
+            }
 
-		} catch (SQLException e) {
-			throw new PersistenceException(e);
-		}
-	}
+        } catch (SQLException e) {
+            throw new PersistenceException(e);
+        }
+    }
 
 }

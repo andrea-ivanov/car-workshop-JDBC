@@ -58,9 +58,7 @@ public class PaymentMeanGatewayImpl implements PaymentMeanGateway {
         try (PreparedStatement pst = c.prepareStatement(Queries.getSQLSentence("TPAYMENTMEANS_FIND_BY_ID"))) {
             pst.setString(1, id);
             try (ResultSet rs = pst.executeQuery()) {
-                return rs.next()
-                        ? Optional.of(new PaymentMeanRecordAssembler().toRecord(rs))
-                        : Optional.empty();
+                return rs.next() ? Optional.of(new PaymentMeanRecordAssembler().toRecord(rs)) : Optional.empty();
             }
 
         } catch (SQLException e) {

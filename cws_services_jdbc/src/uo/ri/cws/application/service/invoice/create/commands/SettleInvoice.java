@@ -89,10 +89,9 @@ public class SettleInvoice implements Command<Void> {
     }
 
     /**
-     * Se valida que todos los métodos de pago de los cargos existen.
-     * - En caso de que sea tarjeta de crédito se comprueba que no esté caducada.
-     * - En caso de que sea bono se comprueba que el cargo no supere el saldo
-     * disponible.
+     * Se valida que todos los métodos de pago de los cargos existen. - En caso de
+     * que sea tarjeta de crédito se comprueba que no esté caducada. - En caso de
+     * que sea bono se comprueba que el cargo no supere el saldo disponible.
      */
     private void checkPaymentMeans() throws BusinessException {
         for (Map.Entry<String, BigDecimal> entry : charges.entrySet()) {
@@ -104,12 +103,10 @@ public class SettleInvoice implements Command<Void> {
             if ("CreditCard".equalsIgnoreCase(pm.dtype)) {
                 CreditCardRecord cc = ccg.findById(pmId).get();
                 YearMonth cardExpiration = YearMonth.from(cc.validThru.toLocalDate());
-                BusinessChecks.isFalse(cardExpiration.isBefore(YearMonth.now()),
-                        "La tarjeta de crédito está caducada");
+                BusinessChecks.isFalse(cardExpiration.isBefore(YearMonth.now()), "La tarjeta de crédito está caducada");
             } else if ("Voucher".equalsIgnoreCase(pm.dtype)) {
                 VoucherRecord vr = vg.findById(pmId).get();
-                BusinessChecks.isTrue(amount.compareTo(vr.available) <= 0,
-                        "El bono no tiene suficiente saldo");
+                BusinessChecks.isTrue(amount.compareTo(vr.available) <= 0, "El bono no tiene suficiente saldo");
             }
         }
     }
@@ -128,7 +125,7 @@ public class SettleInvoice implements Command<Void> {
             totalAmount = totalAmount.add(charge);
         }
         BusinessChecks.isTrue(totalAmount.compareTo(total) == 0,
-                "La suma de los cargos debe coincidir con el precio total de la factura");
+            "La suma de los cargos debe coincidir con el precio total de la factura");
     }
 
     /**

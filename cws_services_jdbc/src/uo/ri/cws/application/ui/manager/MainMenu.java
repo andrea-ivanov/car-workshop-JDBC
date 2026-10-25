@@ -7,17 +7,15 @@ import uo.ri.util.menu.NotYetImplementedAction;
 
 public class MainMenu extends BaseMenu {
 
-	public MainMenu() {
-		menuOptions = new Object[][] {
-				{ "Manager", null },
-				{ "Mechanics management", MechanicMenu.class },
-				{ "Spare parts management", NotYetImplementedAction.class },
-				{ "Vehicle types management", NotYetImplementedAction.class },
-				{ "Vouchers management", VouchersMenu.class } };
-	}
+    public MainMenu() {
+        menuOptions = new Object[][] { { "Manager", null }, { "Mechanics management", MechanicMenu.class },
+            { "Spare parts management", NotYetImplementedAction.class },
+            { "Vehicle types management", NotYetImplementedAction.class },
+            { "Vouchers management", VouchersMenu.class } };
+    }
 
-	public static void main(String[] args) {
-		new MainMenu().execute();
-	}
+    public static void main(String[] args) {
+        new MainMenu().execute();
+    }
 
 }

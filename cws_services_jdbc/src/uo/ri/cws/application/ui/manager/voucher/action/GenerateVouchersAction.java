@@ -13,8 +13,7 @@ public class GenerateVouchersAction implements Action {
     public void execute() throws Exception {
         int[] generated = service.generateVouchers();
 
-        Console.printf("Bonos generados: %d de 20€, %d de 25€, %d de 30€\n",
-                generated[0], generated[1], generated[2]);
+        Console.printf("Bonos generados: %d de 20€, %d de 25€, %d de 30€\n", generated[0], generated[1], generated[2]);
     }
 
 }

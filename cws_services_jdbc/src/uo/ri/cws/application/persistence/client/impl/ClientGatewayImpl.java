@@ -36,9 +36,7 @@ public class ClientGatewayImpl implements ClientGateway {
         try (PreparedStatement pst = c.prepareStatement(Queries.getSQLSentence("TCLIENTS_FIND_BY_ID"))) {
             pst.setString(1, id);
             try (ResultSet rs = pst.executeQuery()) {
-                return rs.next()
-                        ? Optional.of(new ClientRecordAssembler().toRecord(rs))
-                        : Optional.empty();
+                return rs.next() ? Optional.of(new ClientRecordAssembler().toRecord(rs)) : Optional.empty();
             }
 
         } catch (SQLException e) {

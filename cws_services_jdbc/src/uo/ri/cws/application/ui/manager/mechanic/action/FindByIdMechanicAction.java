@@ -11,18 +11,18 @@ import uo.ri.util.menu.Action;
 
 public class FindByIdMechanicAction implements Action {
 
-	private MechanicCrudService service = Factories.service.forMechanicCrudService();
+    private MechanicCrudService service = Factories.service.forMechanicCrudService();
 
-	@Override
-	public void execute() throws Exception {
-		String idMechanic = Console.readString("Type mechanic id: ");
+    @Override
+    public void execute() throws Exception {
+        String idMechanic = Console.readString("Type mechanic id: ");
 
-		Optional<MechanicDto> dto = service.findById(idMechanic);
+        Optional<MechanicDto> dto = service.findById(idMechanic);
 
-		if (dto.isPresent())
-			Printer.printMechanic(dto.get());
-		else
-			Console.println("Mecánico no encontrado");
-	}
+        if (dto.isPresent())
+            Printer.printMechanic(dto.get());
+        else
+            Console.println("Mecánico no encontrado");
+    }
 
 }

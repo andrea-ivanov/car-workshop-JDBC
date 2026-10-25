@@ -13,19 +13,19 @@ import uo.ri.util.exception.BusinessException;
 
 public class FindByIdMechanic implements Command<Optional<MechanicDto>> {
 
-	private String id;
-	private MechanicGateway mg = Factories.persistence.forMechanic();
+    private String id;
+    private MechanicGateway mg = Factories.persistence.forMechanic();
 
-	public FindByIdMechanic(String id) {
-		ArgumentChecks.isNotNull(id, "The id cannot be null");
-		ArgumentChecks.isNotBlank(id, "The id cannot be blank");
-		this.id = id;
-	}
+    public FindByIdMechanic(String id) {
+        ArgumentChecks.isNotNull(id, "The id cannot be null");
+        ArgumentChecks.isNotBlank(id, "The id cannot be blank");
+        this.id = id;
+    }
 
-	@Override
-	public Optional<MechanicDto> execute() throws BusinessException {
-		Optional<MechanicRecord> omr = mg.findById(id);
-		return MechanicDtoAssembler.toDto(omr);
-	}
+    @Override
+    public Optional<MechanicDto> execute() throws BusinessException {
+        Optional<MechanicRecord> omr = mg.findById(id);
+        return MechanicDtoAssembler.toDto(omr);
+    }
 
 }

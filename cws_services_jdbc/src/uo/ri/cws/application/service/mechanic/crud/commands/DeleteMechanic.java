@@ -17,37 +17,37 @@ import uo.ri.util.exception.BusinessException;
 
 public class DeleteMechanic implements Command<Void> {
 
-	private String idMechanic;
-	private MechanicGateway mg = Factories.persistence.forMechanic();
-	private WorkOrderGateway wog = Factories.persistence.forWorkOrder();
-	private InterventionGateway ig = Factories.persistence.forIntervention();
+    private String idMechanic;
+    private MechanicGateway mg = Factories.persistence.forMechanic();
+    private WorkOrderGateway wog = Factories.persistence.forWorkOrder();
+    private InterventionGateway ig = Factories.persistence.forIntervention();
 
-	public DeleteMechanic(String mechanicId) {
-		ArgumentChecks.isNotNull(mechanicId, "El id del mecanico no puede ser nulo");
-		ArgumentChecks.isNotBlank(mechanicId, "El id del mecanico no puede ser nulo");
+    public DeleteMechanic(String mechanicId) {
+        ArgumentChecks.isNotNull(mechanicId, "El id del mecanico no puede ser nulo");
+        ArgumentChecks.isNotBlank(mechanicId, "El id del mecanico no puede ser nulo");
 
-		this.idMechanic = mechanicId;
-	}
+        this.idMechanic = mechanicId;
+    }
 
-	public Void execute() throws BusinessException {
+    public Void execute() throws BusinessException {
 
-		// Check existe el mecanico a eliminar
-		Optional<MechanicRecord> checkMehcanic = mg.findById(idMechanic);
-		BusinessChecks.isFalse(checkMehcanic.isEmpty(), "No existe mecanico con id " + idMechanic);
+        // Check existe el mecanico a eliminar
+        Optional<MechanicRecord> checkMehcanic = mg.findById(idMechanic);
+        BusinessChecks.isFalse(checkMehcanic.isEmpty(), "No existe mecanico con id " + idMechanic);
 
-		// Check no tiene workorders
-		List<WorkOrderRecord> checkWorkorder = wog.findByMechanicId(idMechanic);
-		BusinessChecks.isTrue(checkWorkorder.isEmpty(),
-				"El mecanico no se puede borrar porque tiene averías asignadas.");
+        // Check no tiene workorders
+        List<WorkOrderRecord> checkWorkorder = wog.findByMechanicId(idMechanic);
+        BusinessChecks.isTrue(checkWorkorder.isEmpty(),
+            "El mecanico no se puede borrar porque tiene averías asignadas.");
 
-		// Check no tiene intervenciones
-		List<InterventionRecord> checkIntervention = ig.findByMechanicId(idMechanic);
-		BusinessChecks.isTrue(checkIntervention.isEmpty(),
-				"El mecanico no se puede borrar porque tiene intervenciones");
+        // Check no tiene intervenciones
+        List<InterventionRecord> checkIntervention = ig.findByMechanicId(idMechanic);
+        BusinessChecks.isTrue(checkIntervention.isEmpty(),
+            "El mecanico no se puede borrar porque tiene intervenciones");
 
-		mg.remove(idMechanic);
+        mg.remove(idMechanic);
 
-		return null;
-	}
+        return null;
+    }
 
 }

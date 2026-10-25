@@ -8,26 +8,26 @@ import uo.ri.util.exception.BusinessException;
 import uo.ri.util.menu.Action;
 
 public class AddMechanicAction implements Action {
-	
-	private MechanicCrudService service = Factories.service.forMechanicCrudService();
-	
-	@Override
-	public void execute() throws BusinessException {
 
-		// Get info
-		String nif = Console.readString("nif");
-		String name = Console.readString("Name");
-		String surname = Console.readString("Surname");
+    private MechanicCrudService service = Factories.service.forMechanicCrudService();
 
-		MechanicDto dto = new MechanicDto();
-		dto.nif = nif;
-		dto.name = name;
-		dto.surname = surname;
-		
-		service.create(dto);
-		
-		// Print result
-		Console.println("Mechanic added");
-	}
+    @Override
+    public void execute() throws BusinessException {
+
+        // Get info
+        String nif = Console.readString("nif");
+        String name = Console.readString("Name");
+        String surname = Console.readString("Surname");
+
+        MechanicDto dto = new MechanicDto();
+        dto.nif = nif;
+        dto.name = name;
+        dto.surname = surname;
+
+        service.create(dto);
+
+        // Print result
+        Console.println("Mechanic added");
+    }
 
 }

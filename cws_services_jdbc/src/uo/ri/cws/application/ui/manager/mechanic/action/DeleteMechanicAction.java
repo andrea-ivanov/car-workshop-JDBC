@@ -8,16 +8,16 @@ import uo.ri.util.menu.Action;
 
 public class DeleteMechanicAction implements Action {
 
-	private MechanicCrudService service = Factories.service.forMechanicCrudService();
-	
-	@Override
-	public void execute() throws BusinessException {
+    private MechanicCrudService service = Factories.service.forMechanicCrudService();
 
-		String idMechanic = Console.readString("Type mechanic id ");
-		
-		service.delete(idMechanic);
+    @Override
+    public void execute() throws BusinessException {
 
-		Console.println("Mechanic deleted");
-	}
+        String idMechanic = Console.readString("Type mechanic id ");
+
+        service.delete(idMechanic);
+
+        Console.println("Mechanic deleted");
+    }
 
 }

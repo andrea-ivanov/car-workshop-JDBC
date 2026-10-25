@@ -39,14 +39,8 @@ public class GetVoucherSummay implements Command<List<VoucherSummaryDto>> {
 
             BigDecimal totalAmount = availableAmount.add(consumedAmount);
 
-            VoucherSummaryDto voucherSummary = new VoucherSummaryDto(
-                    client.nif,
-                    client.name,
-                    client.surname,
-                    issuedQty,
-                    totalAmount,
-                    availableAmount,
-                    consumedAmount);
+            VoucherSummaryDto voucherSummary = new VoucherSummaryDto(client.nif, client.name, client.surname, issuedQty,
+                totalAmount, availableAmount, consumedAmount);
             vouchers.add(voucherSummary);
         }
         // ordenados descendentemente

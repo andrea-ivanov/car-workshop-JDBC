@@ -12,14 +12,14 @@ import uo.ri.util.menu.Action;
 
 public class ListAllMechanicsAction implements Action {
 
-	private MechanicCrudService service = Factories.service.forMechanicCrudService();
+    private MechanicCrudService service = Factories.service.forMechanicCrudService();
 
-	@Override
-	public void execute() throws BusinessException {
-		List<MechanicDto> listDtos = service.findAll();
+    @Override
+    public void execute() throws BusinessException {
+        List<MechanicDto> listDtos = service.findAll();
 
-		Console.println("Lista de mecánicos:");
-		for (MechanicDto dto : listDtos)
-			Printer.printMechanic(dto);
-	}
+        Console.println("Lista de mecánicos:");
+        for (MechanicDto dto : listDtos)
+            Printer.printMechanic(dto);
+    }
 }

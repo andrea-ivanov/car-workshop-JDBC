@@ -18,7 +18,7 @@ public class NifChecks {
 
         for (int i = 0; i < 8; i++) {
             ArgumentChecks.isTrue(Character.isDigit(nif.charAt(i)),
-                    "Los 8 primeros caracteres del nif deben ser números");
+                "Los 8 primeros caracteres del nif deben ser números");
         }
 
         int number = Integer.parseInt(nif.substring(0, 8));

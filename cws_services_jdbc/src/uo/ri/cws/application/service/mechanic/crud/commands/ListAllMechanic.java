@@ -12,18 +12,18 @@ import uo.ri.cws.application.service.mechanic.crud.MechanicDtoAssembler;
 
 public class ListAllMechanic implements Command<List<MechanicDto>> {
 
-	private MechanicGateway mg = Factories.persistence.forMechanic();
+    private MechanicGateway mg = Factories.persistence.forMechanic();
 
-	public List<MechanicDto> execute() {
-		List<MechanicRecord> mechanicRecords = mg.findAll();
-		List<MechanicDto> mechanicsDtos = new ArrayList<MechanicDto>();
+    public List<MechanicDto> execute() {
+        List<MechanicRecord> mechanicRecords = mg.findAll();
+        List<MechanicDto> mechanicsDtos = new ArrayList<MechanicDto>();
 
-		for (MechanicRecord mr : mechanicRecords) {
-			MechanicDto dto = MechanicDtoAssembler.toDto(mr);
-			mechanicsDtos.add(dto);
-		}
+        for (MechanicRecord mr : mechanicRecords) {
+            MechanicDto dto = MechanicDtoAssembler.toDto(mr);
+            mechanicsDtos.add(dto);
+        }
 
-		return mechanicsDtos;
-	}
+        return mechanicsDtos;
+    }
 
 }

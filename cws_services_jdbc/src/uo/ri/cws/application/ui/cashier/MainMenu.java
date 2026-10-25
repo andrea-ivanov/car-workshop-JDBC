@@ -8,18 +8,17 @@ import uo.ri.util.menu.NotYetImplementedAction;
 
 public class MainMenu extends BaseMenu {
 
-	public MainMenu() {
+    public MainMenu() {
 
-		menuOptions = new Object[][] { { "Cash", null },
-				{ "Find not invoiced work orders by client", FindNotInvoicedWorkOrdersByClientAction.class },
-				{ "Find work orders by plate", NotYetImplementedAction.class },
-				{ "Invoice work orders", InvoiceWorkorderAction.class },
-				{ "Settle invoice", SettleInvoiceAction.class }, };
+        menuOptions = new Object[][] { { "Cash", null },
+            { "Find not invoiced work orders by client", FindNotInvoicedWorkOrdersByClientAction.class },
+            { "Find work orders by plate", NotYetImplementedAction.class },
+            { "Invoice work orders", InvoiceWorkorderAction.class }, { "Settle invoice", SettleInvoiceAction.class }, };
 
-	}
+    }
 
-	public static void main(String[] args) {
-		new MainMenu().execute();
-	}
+    public static void main(String[] args) {
+        new MainMenu().execute();
+    }
 
 }

@@ -53,9 +53,7 @@ public class VoucherGatewayImpl implements VoucherGateway {
         try (PreparedStatement pst = c.prepareStatement(Queries.getSQLSentence("TVOUCHERS_FIND_BY_ID"))) {
             pst.setString(1, id);
             try (ResultSet rs = pst.executeQuery()) {
-                return rs.next()
-                        ? Optional.of(new VoucherRecordAssembler().toRecord(rs))
-                        : Optional.empty();
+                return rs.next() ? Optional.of(new VoucherRecordAssembler().toRecord(rs)) : Optional.empty();
             }
 
         } catch (SQLException e) {

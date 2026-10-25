@@ -36,9 +36,7 @@ public class CreditCardGatewayImpl implements CreditCardGateway {
         try (PreparedStatement pst = c.prepareStatement(Queries.getSQLSentence("TCREDITCARDS_FIND_BY_ID"))) {
             pst.setString(1, id);
             try (ResultSet rs = pst.executeQuery()) {
-                return rs.next()
-                        ? Optional.of(new CreditCardRecordAssembler().toRecord(rs))
-                        : Optional.empty();
+                return rs.next() ? Optional.of(new CreditCardRecordAssembler().toRecord(rs)) : Optional.empty();
             }
 
         } catch (SQLException e) {

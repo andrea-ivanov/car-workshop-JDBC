@@ -1,7 +1,6 @@
 package uo.ri.cws.application.persistence.workorder.impl;
 
 import java.sql.Connection;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -48,9 +47,7 @@ public class WorkOrderGatewayImpl implements WorkOrderGateway {
         try (PreparedStatement pst = c.prepareStatement(Queries.getSQLSentence("TWORKORDERS_FIND_BY_ID"))) {
             pst.setString(1, id);
             try (ResultSet rs = pst.executeQuery()) {
-                return rs.next()
-                        ? Optional.of(new WorkOrderRecordAssembler().toRecord(rs))
-                        : Optional.empty();
+                return rs.next() ? Optional.of(new WorkOrderRecordAssembler().toRecord(rs)) : Optional.empty();
             }
         } catch (SQLException e) {
             throw new PersistenceException(e);
@@ -97,7 +94,7 @@ public class WorkOrderGatewayImpl implements WorkOrderGateway {
         Connection c = Jdbc.getCurrentConnection(); // fuera del try para que al salir no se cierre la conexión
 
         try (PreparedStatement pst = c
-                .prepareStatement(Queries.getSQLSentence("TWORKORDERS_FIND_PAID_AND_UNUSED_BY_CLIENT_ID"))) {
+            .prepareStatement(Queries.getSQLSentence("TWORKORDERS_FIND_PAID_AND_UNUSED_BY_CLIENT_ID"))) {
             pst.setString(1, id);
 
             try (ResultSet rs = pst.executeQuery()) {
